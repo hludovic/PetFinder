@@ -7,13 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4333CB2D28DA775700857AD0 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4333CB2C28DA775700857AD0 /* Alert.swift */; };
+		4333CB2F28DA93C800857AD0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4333CB2E28DA93C800857AD0 /* Message.swift */; };
+		433D262628D8236C00746B11 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D262528D8236C00746B11 /* Pet.swift */; };
+		433D262E28D8AB8E00746B11 /* PetFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D262D28D8AB8E00746B11 /* PetFinderTests.swift */; };
+		433D263728D8B4E100746B11 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D263628D8B4E100746B11 /* Utilities.swift */; };
+		433D263928D8B6AA00746B11 /* Pet+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D263828D8B6AA00746B11 /* Pet+Extension.swift */; };
+		433D263B28D8C9CD00746B11 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D263A28D8C9CD00746B11 /* User.swift */; };
 		4350361528D8062D00BDE92E /* PetFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4350361428D8062D00BDE92E /* PetFinderApp.swift */; };
 		4350361728D8062D00BDE92E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4350361628D8062D00BDE92E /* ContentView.swift */; };
 		4350361928D8062E00BDE92E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4350361828D8062E00BDE92E /* Assets.xcassets */; };
 		4350361C28D8062E00BDE92E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4350361B28D8062E00BDE92E /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		433D262F28D8AB8E00746B11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4350360928D8062D00BDE92E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4350361028D8062D00BDE92E;
+			remoteInfo = PetFinder;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		4333CB2C28DA775700857AD0 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		4333CB2E28DA93C800857AD0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		433D262428D8095E00746B11 /* PetFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PetFinder.entitlements; sourceTree = "<group>"; };
+		433D262528D8236C00746B11 /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
+		433D262B28D8AB8E00746B11 /* PetFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		433D262D28D8AB8E00746B11 /* PetFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderTests.swift; sourceTree = "<group>"; };
+		433D263628D8B4E100746B11 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		433D263828D8B6AA00746B11 /* Pet+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pet+Extension.swift"; sourceTree = "<group>"; };
+		433D263A28D8C9CD00746B11 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4350361128D8062D00BDE92E /* PetFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4350361428D8062D00BDE92E /* PetFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderApp.swift; sourceTree = "<group>"; };
 		4350361628D8062D00BDE92E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -22,6 +48,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		433D262828D8AB8E00746B11 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4350360E28D8062D00BDE92E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -32,10 +65,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		433D262C28D8AB8E00746B11 /* PetFinderTests */ = {
+			isa = PBXGroup;
+			children = (
+				433D262D28D8AB8E00746B11 /* PetFinderTests.swift */,
+			);
+			path = PetFinderTests;
+			sourceTree = "<group>";
+		};
+		433D263428D8B1AD00746B11 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				433D263A28D8C9CD00746B11 /* User.swift */,
+				433D262528D8236C00746B11 /* Pet.swift */,
+				433D263828D8B6AA00746B11 /* Pet+Extension.swift */,
+				4333CB2C28DA775700857AD0 /* Alert.swift */,
+				4333CB2E28DA93C800857AD0 /* Message.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		433D263528D8B4C800746B11 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				433D263628D8B4E100746B11 /* Utilities.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		4350360828D8062D00BDE92E = {
 			isa = PBXGroup;
 			children = (
 				4350361328D8062D00BDE92E /* PetFinder */,
+				433D262C28D8AB8E00746B11 /* PetFinderTests */,
 				4350361228D8062D00BDE92E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				4350361128D8062D00BDE92E /* PetFinder.app */,
+				433D262B28D8AB8E00746B11 /* PetFinderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -51,8 +114,11 @@
 		4350361328D8062D00BDE92E /* PetFinder */ = {
 			isa = PBXGroup;
 			children = (
+				433D262428D8095E00746B11 /* PetFinder.entitlements */,
 				4350361428D8062D00BDE92E /* PetFinderApp.swift */,
 				4350361628D8062D00BDE92E /* ContentView.swift */,
+				433D263428D8B1AD00746B11 /* Model */,
+				433D263528D8B4C800746B11 /* Utility */,
 				4350361828D8062E00BDE92E /* Assets.xcassets */,
 				4350361A28D8062E00BDE92E /* Preview Content */,
 			);
@@ -70,6 +136,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		433D262A28D8AB8E00746B11 /* PetFinderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 433D263128D8AB8E00746B11 /* Build configuration list for PBXNativeTarget "PetFinderTests" */;
+			buildPhases = (
+				433D262728D8AB8E00746B11 /* Sources */,
+				433D262828D8AB8E00746B11 /* Frameworks */,
+				433D262928D8AB8E00746B11 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				433D263028D8AB8E00746B11 /* PBXTargetDependency */,
+			);
+			name = PetFinderTests;
+			productName = PetFinderTests;
+			productReference = 433D262B28D8AB8E00746B11 /* PetFinderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4350361028D8062D00BDE92E /* PetFinder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4350361F28D8062E00BDE92E /* Build configuration list for PBXNativeTarget "PetFinder" */;
@@ -97,6 +181,10 @@
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					433D262A28D8AB8E00746B11 = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 4350361028D8062D00BDE92E;
+					};
 					4350361028D8062D00BDE92E = {
 						CreatedOnToolsVersion = 14.0;
 					};
@@ -116,11 +204,19 @@
 			projectRoot = "";
 			targets = (
 				4350361028D8062D00BDE92E /* PetFinder */,
+				433D262A28D8AB8E00746B11 /* PetFinderTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		433D262928D8AB8E00746B11 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4350360F28D8062D00BDE92E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -133,18 +229,84 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		433D262728D8AB8E00746B11 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				433D262E28D8AB8E00746B11 /* PetFinderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4350360D28D8062D00BDE92E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				433D263928D8B6AA00746B11 /* Pet+Extension.swift in Sources */,
+				433D262628D8236C00746B11 /* Pet.swift in Sources */,
+				433D263B28D8C9CD00746B11 /* User.swift in Sources */,
 				4350361728D8062D00BDE92E /* ContentView.swift in Sources */,
+				433D263728D8B4E100746B11 /* Utilities.swift in Sources */,
+				4333CB2F28DA93C800857AD0 /* Message.swift in Sources */,
 				4350361528D8062D00BDE92E /* PetFinderApp.swift in Sources */,
+				4333CB2D28DA775700857AD0 /* Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		433D263028D8AB8E00746B11 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4350361028D8062D00BDE92E /* PetFinder */;
+			targetProxy = 433D262F28D8AB8E00746B11 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		433D263228D8AB8E00746B11 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W8A2PVHCN3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.hludovic.PetFinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PetFinder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PetFinder";
+			};
+			name = Debug;
+		};
+		433D263328D8AB8E00746B11 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W8A2PVHCN3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.hludovic.PetFinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PetFinder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PetFinder";
+			};
+			name = Release;
+		};
 		4350361D28D8062E00BDE92E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -264,6 +426,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PetFinder/PetFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PetFinder/Preview Content\"";
@@ -293,6 +456,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PetFinder/PetFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PetFinder/Preview Content\"";
@@ -320,6 +484,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		433D263128D8AB8E00746B11 /* Build configuration list for PBXNativeTarget "PetFinderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				433D263228D8AB8E00746B11 /* Debug */,
+				433D263328D8AB8E00746B11 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4350360C28D8062D00BDE92E /* Build configuration list for PBXProject "PetFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
