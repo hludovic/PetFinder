@@ -12,8 +12,4 @@ struct Alert: Identifiable {
     let petLost: Pet.ID
     let dateAlert: Date
     let dateLost: Date
-    
-    static func sendAlert(for petID: Pet.ID ) async throws { }
-    
-    static func stopSignalment(for petID: Pet.ID) async throws { }
 }

@@ -25,10 +25,9 @@ final class PetFinderTests: XCTestCase {
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
         
+        
         let pet = PetTest()
-        let saved = try await pet.test()
-        try await Alert.sendAlert(for: "AAA")
-        print(saved.recordID.recordName)
+        _ = try await pet.uploadPets()
     }
     
     
