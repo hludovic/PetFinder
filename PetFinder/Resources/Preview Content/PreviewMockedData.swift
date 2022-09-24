@@ -70,6 +70,115 @@ struct PetTest {
         }
     }
     
+    func makeAllPetsMissing() async throws {
+        let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
+        let database = container.publicCloudDatabase
+        
+        let record = CKRecord(recordType: "Alerts")
+        let dateLost: [Date] = [
+            dateStringCreator(year: 2022, month: 3, day: 9),
+            dateStringCreator(year: 2022, month: 2, day: 10),
+            dateStringCreator(year: 2022, month: 1, day: 4),
+            dateStringCreator(year: 2022, month: 3, day: 9),
+            dateStringCreator(year: 2022, month: 2, day: 10),
+            dateStringCreator(year: 2022, month: 1, day: 4),
+            dateStringCreator(year: 2022, month: 3, day: 9),
+            dateStringCreator(year: 2022, month: 2, day: 10),
+            dateStringCreator(year: 2022, month: 1, day: 4)
+        ]
+        
+        let myPets = try await fetchMyPets()
+        for (index, pet) in myPets.enumerated() {
+            let record = CKRecord(recordType: "Alerts")
+            record.setValuesForKeys([
+                "dateLost" : dateLost[index],
+                "pet" : CKRecord.Reference(recordID: CKRecord.ID(recordName: pet.id), action: .none)
+            ])
+            _ = try await database.save(record)
+        }
+    }
+    
+    func isLost(pet: Pet.ID) async throws -> Bool {
+        let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
+        let database = container.publicCloudDatabase
+        let predicate = NSPredicate(format: "pet == %@", CKRecord.Reference(recordID: CKRecord.ID(recordName: pet), action: .none))
+        let query = CKQuery(recordType: "Alerts", predicate: predicate)
+        let (results, cursor) = try await database.records(matching: query)
+        for result in results {
+            if let record = try? result.1.get() {
+                return true
+            }
+        }
+        return false
+        
+    }
+    
+    func fetchMyAlerts() async throws -> [Alert] {
+        var result: [Alert] = []
+        let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
+        let database = container.publicCloudDatabase
+        let myId = try await container.userRecordID()
+        let predicate = NSPredicate(format: "___createdBy == %@", CKRecord.Reference(recordID: myId, action: .none))
+        let query = CKQuery(recordType: "Alerts", predicate: predicate)
+        let (values, _) = try await database.records(matching: query)
+        for value in values {
+            if let record = try? value.1.get() {
+                guard
+                    let dateAlert = record.creationDate,
+                    let dateLost = record["dateLost"] as? Date,
+                    let pet = record["pet"] as? CKRecord.Reference
+                else { throw ModelError.typeCasting }
+                let newAlert = Alert(
+                    id: record.recordID.recordName,
+                    petLost: pet.recordID.recordName,
+                    dateAlert: dateAlert,
+                    dateLost: dateLost
+                )
+                result.append(newAlert)
+            }
+        }
+        return result
+    }
+    
+    func fetchMyPets() async throws -> [Pet] {
+        var data: [Pet] = []
+        let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
+        let privateDB = container.publicCloudDatabase
+        let myId = try await container.userRecordID()
+        let predicate = NSPredicate(format: "___createdBy == %@", CKRecord.Reference(recordID: myId, action: .none))
+        let query = CKQuery(recordType: "Pets", predicate: predicate)
+        let (values, _) = try await privateDB.records(matching: query, resultsLimit: 100)
+        
+        for value in values {
+            if let record = try? value.1.get() {
+                guard
+                    let owner = record["user"] as? CKRecord.Reference,
+                    let name = record["name"] as? String,
+                    let gender = record["gender"] as? String,
+                    let type = record["type"] as? String,
+                    let race = record["race"] as? String,
+                    let birthDay = record["birthDay"] as? Date,
+                    let location = record["location"] as? CLLocation
+                else { throw ModelError.typeCasting }
+                
+                let newPet = Pet(
+                    id: record.recordID.recordName,
+                    owner: owner.recordID.recordName,
+                    name: name,
+                    gender: gender,
+                    type: type,
+                    race: race,
+                    birthDay: birthDay,
+                    location: location
+                )
+                data.append(newPet)
+            }
+        }
+        return data
+    }
+    
+    func fetchMissingPets() {
+    }
 }
 
 private extension PetTest {

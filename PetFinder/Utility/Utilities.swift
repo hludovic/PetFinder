@@ -9,13 +9,16 @@ import Foundation
 
 enum ModelError: Error {
     case noAccount
+    case typeCasting
 }
 
 extension ModelError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .noAccount:
-            return "Sign in to iCloud"
+            return "You are not Sign in to your iCloud account"
+        case .typeCasting:
+            return "Unable to cast the type of the data fetched"
         }
     }
     

@@ -88,8 +88,8 @@
 		4329314C28DBD7C6003FA4EF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				4329314628DBD403003FA4EF /* SettingsViewModel.swift */,
 				4329314428DBD39F003FA4EF /* AroundMeViewModel.swift */,
+				4329314628DBD403003FA4EF /* SettingsViewModel.swift */,
 				4329314828DBD468003FA4EF /* MyPetsViewModel.swift */,
 				4329314A28DBD71A003FA4EF /* MessageViewModel.swift */,
 			);

@@ -9,7 +9,6 @@ import XCTest
 @testable import PetFinder
 
 final class PetFinderTests: XCTestCase {
-    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -27,8 +26,18 @@ final class PetFinderTests: XCTestCase {
         
         
         let pet = PetTest()
-        _ = try await pet.uploadPets()
+//        _ = try await pet.uploadPets()
+        try await pet.makeAllPetsMissing()
+//        let mypets = try await pet.fetchMyPets()
+//        print("AAA")
+//        print(mypets.count)
+        
+        let alerts = try await pet.fetchMyAlerts()
+        print(alerts.count)
+        
+//        let myPets = try await pet.fetchMyPets()
+//        for myPet in myPets {
+//            try await pet.isLost(pet: myPet.id)
+//        }
     }
-    
-    
 }

@@ -25,13 +25,11 @@ struct Pet: Identifiable {
 }
     
 extension Pet {
-    /// List of genders
     enum Gender: String {
         case male = "Male"
         case female = "Female"
     }
     
-    /// ToDo
     enum PetType: String {
         case dog = "Dog"
         case cat = "Cat"
