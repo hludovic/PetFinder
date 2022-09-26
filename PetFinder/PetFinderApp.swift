@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct PetFinderApp: App {
-    @StateObject var aroundMeViewModel = AroundMeViewModel()
+    @StateObject var aroundMeData = AroundMeData()
 
     var body: some Scene {
         WindowGroup {
             WelcomeView()
-                .environmentObject(aroundMeViewModel)
+                .environmentObject(aroundMeData)
         }
     }
 }

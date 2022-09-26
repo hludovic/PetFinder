@@ -18,24 +18,6 @@ struct Pet: Identifiable {
     let dateLost: Date?
     let birthDay: Date
     let location: CLLocation
-    
-    func fetchPhoto() async -> URL? {
-        var result2: CKAsset? = nil
-        let database = CKContainer(identifier: "iCloud.fr.hludovic.container2").publicCloudDatabase
-        let records: [CKRecord.ID : Result<CKRecord, Error>]
-        do {
-            records = try await database.records(for: [CKRecord.ID(recordName: id)], desiredKeys: ["photo"])
-        } catch let error {
-            print(error.localizedDescription)
-            return nil
-        }
-        guard let (_, result) = records.first else { return nil }
-        if let data = try? result.get() {
-            guard let photo = data["photo"] as? CKAsset else { return nil }
-            result2 = photo
-        }
-        return result2?.fileURL
-    }
 }
     
 extension Pet {

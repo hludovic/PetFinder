@@ -9,13 +9,13 @@ import SwiftUI
 
 struct WelcomeView: View {
     @AppStorage("WelcomeViewCurrentTab") var selectedTab = 0
-    @EnvironmentObject var aroundMeViewModel: AroundMeViewModel
+    @EnvironmentObject var data: AroundMeData
     
     var body: some View {
         TabView(selection: $selectedTab) {
             AroundMeView()
                 .tabItem { Label("Around", systemImage: "location.magnifyingglass") }
-                .badge(aroundMeViewModel.petsAround.count)
+                .badge(data.petsAround.count)
                 .tag(0)
             MyPetsView()
                 .tabItem { Label("My Pets", systemImage: "pawprint") }
@@ -30,6 +30,6 @@ struct WelcomeView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         WelcomeView()
-            .environmentObject(AroundMeViewModel())
+            .environmentObject(AroundMeData())
     }
 }

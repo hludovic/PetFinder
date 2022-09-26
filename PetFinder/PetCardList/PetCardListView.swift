@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct PetCardListView: View {
-    @EnvironmentObject var aroundMeViewModel: AroundMeViewModel
-    @State var range: AroundMeViewModel.Range = .around50km
+    @EnvironmentObject var aroundMeData: AroundMeData
     
     var body: some View {
         List {
-            ForEach(aroundMeViewModel.petsAround) { pet in
-                PetCardView(pet: pet)
+            ForEach(aroundMeData.petsAround) { pet in
+                PetCardView(petData: PetData(pet: pet))
             }
             .listRowSeparator(.hidden)
         }
@@ -27,14 +26,13 @@ struct PetCardListView: View {
     }
     
     private func loadData() async {
-        await aroundMeViewModel.fetchMissingPetsAround(radius: .around50km)
+        await aroundMeData.fetchMissingPetsAround()
     }
-    
 }
 
 struct PetListView_Previews: PreviewProvider {
     static var previews: some View {
         PetCardListView()
-            .environmentObject(AroundMeViewModel())
+            .environmentObject(AroundMeData())
     }
 }

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct AroundMeView: View {
-    @EnvironmentObject var aroundMeViewModel: AroundMeViewModel
-    @State var range: AroundMeViewModel.Range = .around50km
+    @EnvironmentObject var aroundMeData: AroundMeData
     
     var body: some View {
         NavigationView {
@@ -17,26 +16,30 @@ struct AroundMeView: View {
                 .navigationTitle("Around Me")
                 .navigationBarTitleDisplayMode(.automatic)
                 .toolbar {
-                    
                     HStack {
                         Image(systemName: "mappin.and.ellipse")
                             .resizable()
                             .foregroundColor(.accentColor)
                             .offset(x: 22)
                             .frame(width: 14, height: 14, alignment: .center)
-                        Picker(selection: $range) {
-                            Text("Radius 1km").tag(AroundMeViewModel.Range.around1km)
-                            Text("Radius 5km").tag(AroundMeViewModel.Range.around5km)
-                            Text("Radius 10km").tag(AroundMeViewModel.Range.around10km)
-                            Text("Radius 50km").tag(AroundMeViewModel.Range.around50km)
+                        Picker(selection: $aroundMeData.range) {
+                            Text("1km").tag(AroundMeData.Range.r1km)
+                            Text("5km").tag(AroundMeData.Range.r5km)
+                            Text("10km").tag(AroundMeData.Range.r10km)
+                            Text("50km").tag(AroundMeData.Range.r50km)
                         } label: {
                             Label("Range", systemImage: "mappin.and.ellipse")
+                        }
+                        .onReceive(aroundMeData.$range) { _ in
+                            Task {
+                                await aroundMeData.fetchMissingPetsAround()
+                            }
                         }
                     }
                 }
         }
         .refreshable {
-            await aroundMeViewModel.fetchMissingPetsAround(radius: range)
+            await aroundMeData.fetchMissingPetsAround()
         }
     }
 }
@@ -44,6 +47,6 @@ struct AroundMeView: View {
 struct AroundMeView_Previews: PreviewProvider {
     static var previews: some View {
             AroundMeView()
-                .environmentObject(AroundMeViewModel())
+                .environmentObject(AroundMeData())
     }
 }

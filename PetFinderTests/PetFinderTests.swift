@@ -46,7 +46,7 @@ final class PetFinderTests: XCTestCase {
         
         let mylocation = CLLocation(latitude: 16.25501060485839, longitude: -61.65399932861327)
 
-        let myPets = try await AroundMeViewModel.fetchMissingPetsAround(location: mylocation, radiusInMeters: 50000)
+        let myPets = try await AroundMeData.fetchMissingPetsAround(location: mylocation, radiusInMeters: 50000)
         print(myPets.count)
     }
 }
