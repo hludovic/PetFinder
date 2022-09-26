@@ -9,8 +9,8 @@ import Foundation
 import CloudKit
 
 struct Message {
-    let alert: Alert.ID
-    let author: User.ID
+    let pet: Pet.ID
+    let user: User.ID
     var isDeleted: Bool {
         get async throws { return true }
     }

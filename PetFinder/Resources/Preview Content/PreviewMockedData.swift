@@ -9,22 +9,20 @@ import Foundation
 import CloudKit
 import SwiftUI
 
-struct PetTest {
-    func uploadPets() async throws -> [CKRecord] {
+struct PreviewMockedData {
+    static func uploadMissingPets() async throws -> [CKRecord] {
         let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
         let database = container.publicCloudDatabase
         
         let record1 = CKRecord(recordType: "Pets")
         let record2 = CKRecord(recordType: "Pets")
         let record3 = CKRecord(recordType: "Pets")
-        let birthDayPet1 = dateStringCreator(year: 2020, month: 1, day: 4)
-        let birthDayPet2 = dateStringCreator(year: 2021, month: 7, day: 12)
-        let birthDayPet3 = dateStringCreator(year: 2022, month: 5, day: 23)
         
         record1.setValuesForKeys([
-            "birthDay" : birthDayPet1,
+            "birthDay" : dateStringCreator(year: 2020, month: 1, day: 4),
+            "dateLost" : dateStringCreator(year: 2022, month: 3, day: 9),
             "gender" : Pet.Gender.male.rawValue,
-            "location": CLLocation(latitude: 16.25503540039062, longitude: -61.653686524178916),
+            "location": CLLocation(latitude: 16.261587307523747, longitude: -61.62137873321357),
             "name" : "Felix",
             "photo" : CKAsset(fileURL: localeURL(forImageNamed: "Pet1")!),
             "race" : Pet.DogRace.english_springer_spaniel.rawValue,
@@ -33,9 +31,10 @@ struct PetTest {
         ])
         
         record2.setValuesForKeys([
-            "birthDay" : birthDayPet2,
+            "birthDay" : dateStringCreator(year: 2021, month: 7, day: 12),
+            "dateLost" : dateStringCreator(year: 2022, month: 2, day: 10),
             "gender" : Pet.Gender.female.rawValue,
-            "location": CLLocation(latitude: 16.0000778, longitude: -61.7333373),
+            "location": CLLocation(latitude: 16.04076861022844, longitude: -61.60101545693777),
             "name" : "Martin",
             "photo" : CKAsset(fileURL: localeURL(forImageNamed: "Pet2")!),
             "race" : Pet.DogRace.border_collie.rawValue,
@@ -44,9 +43,10 @@ struct PetTest {
         ])
         
         record3.setValuesForKeys([
-            "birthDay" : birthDayPet3,
+            "birthDay" : dateStringCreator(year: 2022, month: 5, day: 23),
+            "dateLost" : dateStringCreator(year: 2022, month: 1, day: 4),
             "gender" : Pet.Gender.male.rawValue,
-            "location": CLLocation(latitude: 16.0000778, longitude: -61.7333373),
+            "location": CLLocation(latitude: 16.258563662672728, longitude: -61.272922369971425),
             "name" : "Woofy",
             "photo" : CKAsset(fileURL: localeURL(forImageNamed: "Pet3")!),
             "race" : Pet.DogRace.german_shorthaired_pointer.rawValue,
@@ -70,76 +70,42 @@ struct PetTest {
         }
     }
     
-    func makeAllPetsMissing() async throws {
-        let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
-        let database = container.publicCloudDatabase
-        
-        let record = CKRecord(recordType: "Alerts")
-        let dateLost: [Date] = [
-            dateStringCreator(year: 2022, month: 3, day: 9),
-            dateStringCreator(year: 2022, month: 2, day: 10),
-            dateStringCreator(year: 2022, month: 1, day: 4),
-            dateStringCreator(year: 2022, month: 3, day: 9),
-            dateStringCreator(year: 2022, month: 2, day: 10),
-            dateStringCreator(year: 2022, month: 1, day: 4),
-            dateStringCreator(year: 2022, month: 3, day: 9),
-            dateStringCreator(year: 2022, month: 2, day: 10),
-            dateStringCreator(year: 2022, month: 1, day: 4)
+    static func getFakePets() -> [Pet] {
+        let pets = [
+            Pet(id: "001",
+                owner: "AAA",
+                name: "Felix",
+                gender: Pet.Gender.male.rawValue,
+                type: Pet.PetType.cat.rawValue,
+                race: Pet.DogRace.english_springer_spaniel.rawValue,
+                dateLost: dateStringCreator(year: 2022, month: 3, day: 9),
+                birthDay: dateStringCreator(year: 2020, month: 1, day: 4),
+                location: CLLocation(latitude: 16.261587307523747, longitude: -61.62137873321357)
+               ),
+            Pet(id: "002",
+                owner: "BBB",
+                name: "Martin",
+                gender: Pet.Gender.female.rawValue,
+                type: Pet.PetType.dog.rawValue,
+                race: Pet.DogRace.border_collie.rawValue,
+                dateLost: dateStringCreator(year: 2022, month: 2, day: 10),
+                birthDay: dateStringCreator(year: 2021, month: 7, day: 12),
+                location: CLLocation(latitude: 16.04076861022844, longitude: -61.60101545693777)
+               ),
+            Pet(id: "003",
+                owner: "CCC",
+                name: "Woofy",
+                gender: Pet.Gender.male.rawValue,
+                type: Pet.PetType.dog.rawValue,
+                race: Pet.DogRace.german_shorthaired_pointer.rawValue,
+                dateLost: dateStringCreator(year: 2022, month: 1, day: 4),
+                birthDay: dateStringCreator(year: 2022, month: 5, day: 23),
+                location: CLLocation(latitude: 16.258563662672728, longitude: -61.272922369971425)
+               )
         ]
+        return pets
+    }
         
-        let myPets = try await fetchMyPets()
-        for (index, pet) in myPets.enumerated() {
-            let record = CKRecord(recordType: "Alerts")
-            record.setValuesForKeys([
-                "dateLost" : dateLost[index],
-                "pet" : CKRecord.Reference(recordID: CKRecord.ID(recordName: pet.id), action: .none)
-            ])
-            _ = try await database.save(record)
-        }
-    }
-    
-    func isLost(pet: Pet.ID) async throws -> Bool {
-        let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
-        let database = container.publicCloudDatabase
-        let predicate = NSPredicate(format: "pet == %@", CKRecord.Reference(recordID: CKRecord.ID(recordName: pet), action: .none))
-        let query = CKQuery(recordType: "Alerts", predicate: predicate)
-        let (results, cursor) = try await database.records(matching: query)
-        for result in results {
-            if let record = try? result.1.get() {
-                return true
-            }
-        }
-        return false
-        
-    }
-    
-    func fetchMyAlerts() async throws -> [Alert] {
-        var result: [Alert] = []
-        let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
-        let database = container.publicCloudDatabase
-        let myId = try await container.userRecordID()
-        let predicate = NSPredicate(format: "___createdBy == %@", CKRecord.Reference(recordID: myId, action: .none))
-        let query = CKQuery(recordType: "Alerts", predicate: predicate)
-        let (values, _) = try await database.records(matching: query)
-        for value in values {
-            if let record = try? value.1.get() {
-                guard
-                    let dateAlert = record.creationDate,
-                    let dateLost = record["dateLost"] as? Date,
-                    let pet = record["pet"] as? CKRecord.Reference
-                else { throw ModelError.typeCasting }
-                let newAlert = Alert(
-                    id: record.recordID.recordName,
-                    petLost: pet.recordID.recordName,
-                    dateAlert: dateAlert,
-                    dateLost: dateLost
-                )
-                result.append(newAlert)
-            }
-        }
-        return result
-    }
-    
     func fetchMyPets() async throws -> [Pet] {
         var data: [Pet] = []
         let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
@@ -147,7 +113,7 @@ struct PetTest {
         let myId = try await container.userRecordID()
         let predicate = NSPredicate(format: "___createdBy == %@", CKRecord.Reference(recordID: myId, action: .none))
         let query = CKQuery(recordType: "Pets", predicate: predicate)
-        let (values, _) = try await privateDB.records(matching: query, resultsLimit: 100)
+        let (values, _) = try await privateDB.records(matching: query, desiredKeys: ["user", "name", "gender", "type", "race", "birthDay", "location"], resultsLimit: 100)
         
         for value in values {
             if let record = try? value.1.get() {
@@ -157,6 +123,7 @@ struct PetTest {
                     let gender = record["gender"] as? String,
                     let type = record["type"] as? String,
                     let race = record["race"] as? String,
+                    let dateLost = record["dateLost"] as? Date,
                     let birthDay = record["birthDay"] as? Date,
                     let location = record["location"] as? CLLocation
                 else { throw ModelError.typeCasting }
@@ -168,6 +135,7 @@ struct PetTest {
                     gender: gender,
                     type: type,
                     race: race,
+                    dateLost: dateLost,
                     birthDay: birthDay,
                     location: location
                 )
@@ -176,13 +144,10 @@ struct PetTest {
         }
         return data
     }
-    
-    func fetchMissingPets() {
-    }
 }
 
-private extension PetTest {
-    func dateStringCreator(year: Int, month: Int, day: Int) -> Date {
+private extension PreviewMockedData {
+    static func dateStringCreator(year: Int, month: Int, day: Int) -> Date {
         var component: DateComponents = DateComponents()
         component.calendar = .current
         component.year = year
@@ -191,7 +156,7 @@ private extension PetTest {
         return component .date!
     }
     
-    func localeURL(forImageNamed name: String) -> URL? {
+    static func localeURL(forImageNamed name: String) -> URL? {
         let fileManager = FileManager.default
         let cacheDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         let url = cacheDirectory.appendingPathComponent("\(name).jpg")

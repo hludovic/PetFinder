@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import PetFinder
+import CoreLocation
 
 final class PetFinderTests: XCTestCase {
     override func setUpWithError() throws {
@@ -25,19 +26,27 @@ final class PetFinderTests: XCTestCase {
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
         
         
-        let pet = PetTest()
-//        _ = try await pet.uploadPets()
-        try await pet.makeAllPetsMissing()
+//        let pet = PetTest()
+//        _ = try await pet.uploadMissingPets()
+//        try await pet.makeAllPetsMissing()
 //        let mypets = try await pet.fetchMyPets()
 //        print("AAA")
 //        print(mypets.count)
         
-        let alerts = try await pet.fetchMyAlerts()
-        print(alerts.count)
+//        let alerts = try await pet.fetchMyAlerts()
+//        print(alerts.count)
         
 //        let myPets = try await pet.fetchMyPets()
+//        print(myPets)
+//        try await myPets.first?.photo
 //        for myPet in myPets {
 //            try await pet.isLost(pet: myPet.id)
 //        }
+        
+        
+        let mylocation = CLLocation(latitude: 16.25501060485839, longitude: -61.65399932861327)
+
+        let myPets = try await AroundMeViewModel.fetchMissingPetsAround(location: mylocation, radiusInMeters: 50000)
+        print(myPets.count)
     }
 }

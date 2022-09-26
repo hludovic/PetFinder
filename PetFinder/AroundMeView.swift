@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct AroundMeView: View {
-    
-    let aroundMevewModel = AroundMeViewModel()
+    @EnvironmentObject var aroundMeViewModel: AroundMeViewModel
     
     var body: some View {
-        Text("Around me")
+        PetCardListView()
+            .environmentObject(aroundMeViewModel)
     }
 }
 
 struct AroundMeView_Previews: PreviewProvider {
     static var previews: some View {
         AroundMeView()
+            .environmentObject(AroundMeViewModel())
     }
 }

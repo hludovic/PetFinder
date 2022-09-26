@@ -11,8 +11,8 @@ class MessageViewModel {
     
     func getInterlocutor() async throws -> User.ID { return "" }
     
-    static func getMessages(from userId: User.ID, about alertId: Alert.ID) async throws -> [Message] { return [] }
+//    static func getMessages(from userId: User.ID, about alertId: Alert.ID) async throws -> [Message] { return [] }
     
-    static func deleteMessage(from userId: User.ID, about alertId: Alert.ID) async throws { }
+//    static func deleteMessage(from userId: User.ID, about alertId: Alert.ID) async throws { }
 
 }

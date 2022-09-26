@@ -7,15 +7,24 @@
 
 import SwiftUI
 
-struct PetCellView: View {
-    let petName: String
-    let dateLost: String
+struct PetCardView: View {
+    @State private var isRedacted: Bool = true
+    @State private var petName: String = ""
+    @State private var dateLost = ""
+    @State private var imageURL: URL? = nil
+    var pet: Pet
     
     var body: some View {
         VStack {
-            Image("Pet1")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+            AsyncImage(url: imageURL) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                Image("placeholder")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
             HStack {
                 VStack(alignment: .leading) {
                     Text(petName)
@@ -39,13 +48,32 @@ struct PetCellView: View {
                 .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255, opacity: 0.1), lineWidth: 1)
         )
         .shadow(radius: 5)
+        .onAppear {
+            Task {
+                await loadData()
+            }
+        }
+        .redacted(reason: isRedacted ? .placeholder : .init())
+    }
+    
+    private func loadData() async {
+        petName = pet.name
+        var fetchedImageURL: URL?
+        fetchedImageURL = await pet.fetchPhoto()        
+        guard let date = pet.dateLost, let url = fetchedImageURL
+        else { return }
+        
+        dateLost = date.description
+        imageURL = url
+        isRedacted = false
     }
 }
 
 
 struct PetCellView_Previews: PreviewProvider {
     static var previews: some View {
-        PetCellView(petName: "Felix", dateLost: "12 Octobre 2022")
+        let pets = PreviewMockedData.getFakePets()
+        PetCardView(pet: pets.first!)
             .previewLayout(.fixed(width: 500, height: 700))
             .previewDisplayName("New Pet Badge")
     }
