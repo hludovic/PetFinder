@@ -83,7 +83,8 @@ extension AroundMeViewModel {
         return data
     }
     
-    enum Range: CGFloat, CaseIterable {
+    enum Range: CGFloat, CaseIterable, Identifiable {
+        var id: CGFloat { self.rawValue }
         case around1km = 1000
         case around5km = 5000
         case around10km = 10000

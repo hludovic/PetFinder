@@ -9,12 +9,14 @@ import SwiftUI
 
 struct PetCardListView: View {
     @EnvironmentObject var aroundMeViewModel: AroundMeViewModel
+    @State var range: AroundMeViewModel.Range = .around50km
     
     var body: some View {
         List {
             ForEach(aroundMeViewModel.petsAround) { pet in
                 PetCardView(pet: pet)
             }
+            .listRowSeparator(.hidden)
         }
         .listStyle(.inset)
         .onAppear{
@@ -23,6 +25,7 @@ struct PetCardListView: View {
             }
         }
     }
+    
     private func loadData() async {
         await aroundMeViewModel.fetchMissingPetsAround(radius: .around50km)
     }
