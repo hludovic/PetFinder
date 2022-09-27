@@ -15,7 +15,6 @@ class AroundMeData: ObservableObject {
     @Published var range: Range = .r50km
     
     func fetchMissingPetsAround() async {
-        await MainActor.run { petsAround = [] }
         await MainActor.run{
             fetchingPetsActivity = true
         }

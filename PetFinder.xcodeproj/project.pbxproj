@@ -21,6 +21,7 @@
 		4350361928D8062E00BDE92E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4350361828D8062E00BDE92E /* Assets.xcassets */; };
 		4350361C28D8062E00BDE92E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4350361B28D8062E00BDE92E /* Preview Assets.xcassets */; };
 		435509D528E1E16E007FB344 /* PetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435509D428E1E16E007FB344 /* PetData.swift */; };
+		435509D728E24A3C007FB344 /* AroundMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435509D628E24A3C007FB344 /* AroundMeTests.swift */; };
 		43C61AA228DAB5D0001D3E51 /* AroundMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C61AA128DAB5D0001D3E51 /* AroundMeView.swift */; };
 		43C61AA428DAB5F3001D3E51 /* MyPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C61AA328DAB5F3001D3E51 /* MyPetsView.swift */; };
 		43C61AA628DAB64D001D3E51 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C61AA528DAB64D001D3E51 /* SettingsView.swift */; };
@@ -57,6 +58,7 @@
 		4350361828D8062E00BDE92E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4350361B28D8062E00BDE92E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		435509D428E1E16E007FB344 /* PetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetData.swift; sourceTree = "<group>"; };
+		435509D628E24A3C007FB344 /* AroundMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundMeTests.swift; sourceTree = "<group>"; };
 		43C61AA128DAB5D0001D3E51 /* AroundMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundMeView.swift; sourceTree = "<group>"; };
 		43C61AA328DAB5F3001D3E51 /* MyPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPetsView.swift; sourceTree = "<group>"; };
 		43C61AA528DAB64D001D3E51 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				433D262D28D8AB8E00746B11 /* PetFinderTests.swift */,
+				435509D628E24A3C007FB344 /* AroundMeTests.swift */,
 			);
 			path = PetFinderTests;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				435509D728E24A3C007FB344 /* AroundMeTests.swift in Sources */,
 				433D262E28D8AB8E00746B11 /* PetFinderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -25,7 +25,6 @@ final class PetFinderTests: XCTestCase {
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
         
-        
 //        let pet = PetTest()
 //        _ = try await pet.uploadMissingPets()
 //        try await pet.makeAllPetsMissing()
@@ -43,10 +42,9 @@ final class PetFinderTests: XCTestCase {
 //            try await pet.isLost(pet: myPet.id)
 //        }
         
-        
-        let mylocation = CLLocation(latitude: 16.25501060485839, longitude: -61.65399932861327)
-
-        let myPets = try await AroundMeData.fetchMissingPetsAround(location: mylocation, radiusInMeters: 50000)
-        print(myPets.count)
+        let dataManager = AroundMeData()
+        print(dataManager.petsAround.count)
+        await dataManager.fetchMissingPetsAround()
+        print(dataManager.petsAround.count)
     }
 }

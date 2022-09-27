@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PetCardView: View {
-    @ObservedObject var petData: PetData
+    @StateObject var petData: PetData
     
     var body: some View {
         VStack {
