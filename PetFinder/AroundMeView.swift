@@ -16,24 +16,21 @@ struct AroundMeView: View {
                 .navigationTitle("Around Me")
                 .navigationBarTitleDisplayMode(.automatic)
                 .toolbar {
-                    HStack {
-                        Image(systemName: "mappin.and.ellipse")
-                            .resizable()
-                            .foregroundColor(.accentColor)
-                            .offset(x: 22)
-                            .frame(width: 14, height: 14, alignment: .center)
-                        Picker(selection: $aroundMeData.range) {
-                            Text("1km").tag(AroundMeData.Range.r1km)
-                            Text("5km").tag(AroundMeData.Range.r5km)
-                            Text("10km").tag(AroundMeData.Range.r10km)
-                            Text("50km").tag(AroundMeData.Range.r50km)
-                        } label: {
-                            Label("Range", systemImage: "mappin.and.ellipse")
-                        }
-                        .onReceive(aroundMeData.$range) { _ in
-                            Task {
-                                await aroundMeData.fetchMissingPetsAround()
-                            }
+                    Picker(selection: $aroundMeData.range) {
+                        Label("Radius 1 km", systemImage: "mappin.and.ellipse")
+                            .tag(AroundMeData.Range.r1km)
+                        Label("Radius 5 km", systemImage: "mappin.and.ellipse")
+                            .tag(AroundMeData.Range.r5km)
+                        Label("Radius 10 km", systemImage: "mappin.and.ellipse")
+                            .tag(AroundMeData.Range.r10km)
+                        Label("Radius 50 km", systemImage: "mappin.and.ellipse")
+                            .tag(AroundMeData.Range.r50km)
+                    } label: {
+                        Label("Range", systemImage: "mappin.and.ellipse")
+                    }
+                    .onReceive(aroundMeData.$range) { _ in
+                        Task {
+                            await aroundMeData.fetchMissingPetsAround()
                         }
                     }
                 }
