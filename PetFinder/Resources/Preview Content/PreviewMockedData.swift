@@ -8,8 +8,14 @@
 import Foundation
 import CloudKit
 import SwiftUI
+import CoreLocation
 
 struct PreviewMockedData {
+    static var myLocation: CLLocationCoordinate2D {
+        let location = CLLocation(latitude:16.255072, longitude: -61.653711)
+        return location.coordinate
+    }
+    
     static func uploadMissingPets() async throws -> [CKRecord] {
         let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
         let database = container.publicCloudDatabase
@@ -19,8 +25,8 @@ struct PreviewMockedData {
         let record3 = CKRecord(recordType: "Pets")
         
         record1.setValuesForKeys([
-            "birthDay" : dateStringCreator(year: 2020, month: 1, day: 4),
-            "dateLost" : dateStringCreator(year: 2022, month: 3, day: 9),
+            "birthDay" : dateCreator(year: 2020, month: 1, day: 4),
+            "dateLost" : dateCreator(year: 2022, month: 3, day: 9),
             "gender" : Pet.Gender.male.rawValue,
             "location": CLLocation(latitude: 16.261587307523747, longitude: -61.62137873321357),
             "name" : "Felix",
@@ -31,8 +37,8 @@ struct PreviewMockedData {
         ])
         
         record2.setValuesForKeys([
-            "birthDay" : dateStringCreator(year: 2021, month: 7, day: 12),
-            "dateLost" : dateStringCreator(year: 2022, month: 2, day: 10),
+            "birthDay" : dateCreator(year: 2021, month: 7, day: 12),
+            "dateLost" : dateCreator(year: 2022, month: 2, day: 10),
             "gender" : Pet.Gender.female.rawValue,
             "location": CLLocation(latitude: 16.04076861022844, longitude: -61.60101545693777),
             "name" : "Martin",
@@ -43,8 +49,8 @@ struct PreviewMockedData {
         ])
         
         record3.setValuesForKeys([
-            "birthDay" : dateStringCreator(year: 2022, month: 5, day: 23),
-            "dateLost" : dateStringCreator(year: 2022, month: 1, day: 4),
+            "birthDay" : dateCreator(year: 2022, month: 5, day: 23),
+            "dateLost" : dateCreator(year: 2022, month: 1, day: 4),
             "gender" : Pet.Gender.male.rawValue,
             "location": CLLocation(latitude: 16.258563662672728, longitude: -61.272922369971425),
             "name" : "Woofy",
@@ -78,8 +84,8 @@ struct PreviewMockedData {
                 gender: Pet.Gender.male.rawValue,
                 type: Pet.PetType.cat.rawValue,
                 race: Pet.DogRace.english_springer_spaniel.rawValue,
-                dateLost: dateStringCreator(year: 2022, month: 3, day: 9),
-                birthDay: dateStringCreator(year: 2020, month: 1, day: 4),
+                dateLost: dateCreator(year: 2022, month: 3, day: 9),
+                birthDay: dateCreator(year: 2020, month: 1, day: 4),
                 location: CLLocation(latitude: 16.261587307523747, longitude: -61.62137873321357)
                ),
             Pet(id: "002",
@@ -88,8 +94,8 @@ struct PreviewMockedData {
                 gender: Pet.Gender.female.rawValue,
                 type: Pet.PetType.dog.rawValue,
                 race: Pet.DogRace.border_collie.rawValue,
-                dateLost: dateStringCreator(year: 2022, month: 2, day: 10),
-                birthDay: dateStringCreator(year: 2021, month: 7, day: 12),
+                dateLost: dateCreator(year: 2022, month: 2, day: 10),
+                birthDay: dateCreator(year: 2021, month: 7, day: 12),
                 location: CLLocation(latitude: 16.04076861022844, longitude: -61.60101545693777)
                ),
             Pet(id: "003",
@@ -98,8 +104,8 @@ struct PreviewMockedData {
                 gender: Pet.Gender.male.rawValue,
                 type: Pet.PetType.dog.rawValue,
                 race: Pet.DogRace.german_shorthaired_pointer.rawValue,
-                dateLost: dateStringCreator(year: 2022, month: 1, day: 4),
-                birthDay: dateStringCreator(year: 2022, month: 5, day: 23),
+                dateLost: dateCreator(year: 2022, month: 1, day: 4),
+                birthDay: dateCreator(year: 2022, month: 5, day: 23),
                 location: CLLocation(latitude: 16.258563662672728, longitude: -61.272922369971425)
                )
         ]
@@ -147,7 +153,7 @@ struct PreviewMockedData {
 }
 
 private extension PreviewMockedData {
-    static func dateStringCreator(year: Int, month: Int, day: Int) -> Date {
+    static func dateCreator(year: Int, month: Int, day: Int) -> Date {
         var component: DateComponents = DateComponents()
         component.calendar = .current
         component.year = year

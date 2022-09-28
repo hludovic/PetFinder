@@ -11,39 +11,25 @@ struct AroundMeView: View {
     @EnvironmentObject var aroundMeData: AroundMeData
     
     var body: some View {
-        NavigationView {
-            PetCardListView()
-                .navigationTitle("Around Me")
-                .navigationBarTitleDisplayMode(.automatic)
-                .toolbar {
-                    Picker(selection: $aroundMeData.range) {
-                        Label("Radius 1 km", systemImage: "mappin.and.ellipse")
-                            .tag(AroundMeData.Range.r1km)
-                        Label("Radius 5 km", systemImage: "mappin.and.ellipse")
-                            .tag(AroundMeData.Range.r5km)
-                        Label("Radius 10 km", systemImage: "mappin.and.ellipse")
-                            .tag(AroundMeData.Range.r10km)
-                        Label("Radius 50 km", systemImage: "mappin.and.ellipse")
-                            .tag(AroundMeData.Range.r50km)
-                    } label: {
-                        Label("Range", systemImage: "mappin.and.ellipse")
-                    }
-                    .onReceive(aroundMeData.$range) { _ in
-                        Task {
-                            await aroundMeData.fetchMissingPetsAround()
-                        }
-                    }
-                }
-        }
-        .refreshable {
-            await aroundMeData.fetchMissingPetsAround()
+        if !aroundMeData.hasPermission {
+            CLAutorizationView()
+        } else {
+                PetCardListView()
         }
     }
 }
 
 struct AroundMeView_Previews: PreviewProvider {
     static var previews: some View {
-            AroundMeView()
-                .environmentObject(AroundMeData())
+        let previewData = AroundMeData()
+        AroundMeView()
+            .environmentObject(previewData)
+            .onAppear{
+                previewData.location = PreviewMockedData.myLocation
+                previewData.hasPermission = true
+                Task {
+                    await previewData.fetchMissingPetsAround()
+                }
+            }
     }
 }

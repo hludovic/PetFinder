@@ -11,28 +11,55 @@ struct PetCardListView: View {
     @EnvironmentObject var aroundMeData: AroundMeData
     
     var body: some View {
-        List {
-            ForEach(aroundMeData.petsAround) { pet in
-                PetCardView(petData: PetData(pet: pet))
+        NavigationView {
+            List {
+                ForEach(aroundMeData.petsAround) { pet in
+                    PetCardView(petData: PetData(pet: pet))
+                }
+                .listRowSeparator(.hidden)
             }
-            .listRowSeparator(.hidden)
-        }
-        .listStyle(.inset)
-        .onAppear{
-            Task {
-                await loadData()
+            .listStyle(.inset)
+            .navigationTitle("Around Me")
+            .toolbar {
+                Picker(selection: $aroundMeData.range) {
+                    Label("Radius 1 km", systemImage: "mappin.and.ellipse")
+                        .tag(AroundMeData.Range.r1km)
+                    Label("Radius 5 km", systemImage: "mappin.and.ellipse")
+                        .tag(AroundMeData.Range.r5km)
+                    Label("Radius 10 km", systemImage: "mappin.and.ellipse")
+                        .tag(AroundMeData.Range.r10km)
+                    Label("Radius 50 km", systemImage: "mappin.and.ellipse")
+                        .tag(AroundMeData.Range.r50km)
+                } label: {
+                    Label("Range", systemImage: "mappin.and.ellipse")
+                }
+                .onReceive(aroundMeData.$range) { _ in
+                    Task {
+                        await aroundMeData.fetchMissingPetsAround()
+                    }
+                }
+                .onAppear{
+                    aroundMeData.loadData()
+                }
             }
+
         }
-    }
-    
-    private func loadData() async {
-        await aroundMeData.fetchMissingPetsAround()
+        .refreshable {
+            aroundMeData.loadData()
+        }
     }
 }
 
 struct PetListView_Previews: PreviewProvider {
     static var previews: some View {
+        let previewData = AroundMeData()
         PetCardListView()
-            .environmentObject(AroundMeData())
+            .environmentObject(previewData)
+            .onAppear{
+                previewData.location = PreviewMockedData.myLocation
+                Task {
+                    await previewData.fetchMissingPetsAround()
+                }
+            }
     }
 }

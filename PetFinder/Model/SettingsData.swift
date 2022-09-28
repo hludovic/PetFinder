@@ -1,5 +1,5 @@
 //
-//  SettingsViewModel.swift
+//  SettingsData.swift
 //  PetFinder
 //
 //  Created by Ludovic HENRY on 21/09/2022.
@@ -9,7 +9,7 @@ import Foundation
 
 let UDKeyAllowsNotifications: String = "allowsNotification"
 
-class SettingsViewModel {
+class SettingsData {
     // It not defines the user -> In the Settings
     static var allowNotifications: Bool {
         get {

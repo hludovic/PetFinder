@@ -8,8 +8,70 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @State var cloudStatus: Bool? = true
+    @State var pseudonym: String? = "Ludovic"
+    @State var cloudDescription: String = "Online"
+    @State var toggle1: Bool = false
+    @State var toggle2: Bool = true
+    
     var body: some View {
-        Text("Settings")
+        NavigationView {
+            List {
+                Section("Pseudonym") {
+                    HStack {
+                        pseudonymText()
+                        Spacer()
+                        Button("Edit") {
+                            print("edit")
+                        }
+                        .buttonStyle(.borderless)
+                    }
+                }
+                
+                Section("CloudKit Status") {
+                    HStack {
+                        Text(cloudDescription)
+                        Spacer()
+                        CloudStatusView(status: $cloudStatus)
+                    }
+                }
+                
+                Section {
+                    Text("Blocked users")
+                    Toggle("Allows notifications", isOn: $toggle1)
+                    Toggle("Allow recive Photo in messages", isOn: $toggle2)
+                } header: {
+                    Text("Security")
+                }
+                
+                Section {
+                    HStack {
+                        Text("Location status description")
+                        Spacer()
+                        Image(systemName: "location.fill.viewfinder")
+                            .foregroundColor(.red)
+                    }
+                } header: {
+                    Text("Location")
+                } footer: {
+                    Text("To allow location go to settings -> Loction -> Enable to allows it Ok ?")
+                }
+
+                
+            }
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+    
+    func pseudonymText() -> Text {
+        if let pseudo = pseudonym {
+            return Text(pseudo)
+                .foregroundColor(.gray)
+        } else {
+            return Text("No registered pseudonym")
+                .foregroundColor(.red)
+        }
     }
 }
 

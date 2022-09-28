@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import CoreLocation
+import CoreLocationUI
+
 
 struct MyPetsView: View {
+    
     var body: some View {
-        Text("My Pets")
+        Text("My pets view")
     }
 }
 

@@ -44,10 +44,9 @@ extension PetData {
     }
     
     private func loadphotoURL() async {
-        let database = CKContainer(identifier: "iCloud.fr.hludovic.container2").publicCloudDatabase
         let records: [CKRecord.ID : Result<CKRecord, Error>]
         do {
-            records = try await database.records(for: [CKRecord.ID(recordName: pet.id)], desiredKeys: ["photo"])
+            records = try await Model.database.records(for: [CKRecord.ID(recordName: pet.id)], desiredKeys: ["photo"])
         } catch let error {
             return await displayError(message: "Unable to load the pet data", error: error)
         }
