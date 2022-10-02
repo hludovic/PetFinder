@@ -10,7 +10,7 @@ import CoreLocation
 
 class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
-    @Published var location: CLLocation?
+    @Published var location: CLLocationCoordinate2D?
     @Published var authorizationStatus: CLAuthorizationStatus
     
     private let locationManager: CLLocationManager
@@ -25,35 +25,26 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         locationManager.startUpdatingLocation()
     }
     
-//    func requestAuthorization() {
-//        guard let authorized, !authorized else { return }
-//        locationManager.requestWhenInUseAuthorization()
-//    }
+    func requestLocation() {
+        locationManager.requestLocation()
+    }
+    
+    func requestAuthorization() {
+        locationManager.requestWhenInUseAuthorization()
+    }
     
     // MARK: - Core Location Manager Delegate
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let newLocation = locations.first {
-            location = newLocation
-        }
+        location = locations.first?.coordinate
     }
-
-//    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-//        switch manager.authorizationStatus {
-//        case .notDetermined:
-//            authorized = false
-//        case .restricted, .denied:
-//            authorized = false
-//        case .authorizedAlways, .authorizedWhenInUse:
-//            authorized = true
-//        @unknown default:
-//            authorized = false
-//        }
-//    }
-
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        authorizationStatus = manager.authorizationStatus
+    }
 }
 

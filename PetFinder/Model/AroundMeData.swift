@@ -7,73 +7,23 @@
 
 import SwiftUI
 import CloudKit
-import CoreLocation
 
-class AroundMeData: NSObject, ObservableObject {
+class AroundMeData: ObservableObject {
     @Published var petsAround: [Pet] = []
     @Published var range: Range = .r50km
-    @Published var location: CLLocationCoordinate2D?
-    @Published var hasPermission: Bool = false
-    private let locationManager = CLLocationManager()
     
-    override init() {
-        super.init()
-        locationManager.delegate = self
-    }
-    
-    func fetchMissingPetsAround() async {
-        if let locationCoordinate2D = location {
-            let location = CLLocation(latitude: locationCoordinate2D.latitude, longitude: locationCoordinate2D.longitude)
-            let pets: [Pet]
-            do {
-                pets = try await fetchMissingPetsAround(location: location, radiusInMeters: range)
-            } catch let error { return print(error.localizedDescription) }
-            await MainActor.run{
-                petsAround = pets
-            }
+    func fetchMissingPetsAround(location: CLLocationCoordinate2D?) async {
+        guard let location else { return print("ERROR") }
+        let locationToFetch = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        
+        let pets: [Pet]
+        do {
+            pets = try await fetchMissingPetsAround(location: locationToFetch, radiusInMeters: range)
+        } catch let error { return print(error.localizedDescription) }
+        await MainActor.run{
+            petsAround = pets
         }
     }
-    
-    func loadData() {
-        requestLocation()
-    }    
-}
-
-// MARK: - Core Location
-extension AroundMeData: CLLocationManagerDelegate {
-    private func requestLocation() {
-        if hasPermission {
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            locationManager.requestLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let newLocation = locations.first {
-            location = newLocation.coordinate
-            Task { await fetchMissingPetsAround() }
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        let status = manager.authorizationStatus
-        switch status {
-        case .notDetermined:
-            hasPermission = false
-            manager.requestWhenInUseAuthorization()
-        case .restricted, .denied:
-            hasPermission = false
-        case .authorizedAlways, .authorizedWhenInUse:
-            hasPermission = true
-        @unknown default:
-            hasPermission = false
-        }
-    }
-
 }
 
 // MARK: - Private methods

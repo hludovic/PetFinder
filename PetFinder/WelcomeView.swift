@@ -30,15 +30,13 @@ struct WelcomeView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let previewData = AroundMeData()
+        let locationManager = LocationManager()
         WelcomeView()
             .environmentObject(previewData)
+            .environmentObject(locationManager)
             .onAppear{
-                previewData.location = PreviewMockedData.myLocation
-                previewData.hasPermission = true
-                Task {
-                    await previewData.fetchMissingPetsAround()
-                }
+                locationManager.authorizationStatus = .authorizedWhenInUse
+                locationManager.location = PreviewMockedData.myLocation
             }
-
     }
 }

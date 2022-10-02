@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PetCardListView: View {
     @EnvironmentObject var aroundMeData: AroundMeData
+    @EnvironmentObject var locationManager: LocationManager
     
     var body: some View {
         NavigationView {
@@ -35,17 +36,22 @@ struct PetCardListView: View {
                 }
                 .onReceive(aroundMeData.$range) { _ in
                     Task {
-                        await aroundMeData.fetchMissingPetsAround()
+                        let location = locationManager.location
+                        await aroundMeData.fetchMissingPetsAround(location: location)
                     }
                 }
                 .onAppear{
-                    aroundMeData.loadData()
+                    Task {
+                        let location = locationManager.location
+                        await aroundMeData.fetchMissingPetsAround(location: location)
+                    }
                 }
             }
 
         }
         .refreshable {
-            await aroundMeData.fetchMissingPetsAround()
+            let location = locationManager.location
+            await aroundMeData.fetchMissingPetsAround(location: location)
         }
     }
 }
@@ -53,13 +59,12 @@ struct PetCardListView: View {
 struct PetListView_Previews: PreviewProvider {
     static var previews: some View {
         let previewData = AroundMeData()
+        let locationManager = LocationManager()
         PetCardListView()
             .environmentObject(previewData)
+            .environmentObject(locationManager)
             .onAppear{
-                previewData.location = PreviewMockedData.myLocation
-                Task {
-                    await previewData.fetchMissingPetsAround()
-                }
+                locationManager.location = PreviewMockedData.myLocation
             }
     }
 }

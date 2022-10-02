@@ -43,7 +43,7 @@ struct PetCardView: View {
             }
             .padding([.horizontal, .bottom])
         }
-        .background(Color.white)
+        .background(Color("CellBackgroundColor"))
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
