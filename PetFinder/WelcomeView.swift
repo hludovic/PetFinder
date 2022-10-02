@@ -34,6 +34,7 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(previewData)
             .onAppear{
                 previewData.location = PreviewMockedData.myLocation
+                previewData.hasPermission = true
                 Task {
                     await previewData.fetchMissingPetsAround()
                 }

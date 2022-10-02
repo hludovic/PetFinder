@@ -45,7 +45,7 @@ struct PetCardListView: View {
 
         }
         .refreshable {
-            aroundMeData.loadData()
+            await aroundMeData.fetchMissingPetsAround()
         }
     }
 }

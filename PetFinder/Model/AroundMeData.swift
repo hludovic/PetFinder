@@ -14,11 +14,11 @@ class AroundMeData: NSObject, ObservableObject {
     @Published var range: Range = .r50km
     @Published var location: CLLocationCoordinate2D?
     @Published var hasPermission: Bool = false
-    let manager = CLLocationManager()
+    private let locationManager = CLLocationManager()
     
     override init() {
         super.init()
-        manager.delegate = self
+        locationManager.delegate = self
     }
     
     func fetchMissingPetsAround() async {
@@ -36,15 +36,15 @@ class AroundMeData: NSObject, ObservableObject {
     
     func loadData() {
         requestLocation()
-    }
+    }    
 }
 
 // MARK: - Core Location
 extension AroundMeData: CLLocationManagerDelegate {
     private func requestLocation() {
         if hasPermission {
-            manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            manager.requestLocation()
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.requestLocation()
         }
     }
     
@@ -62,9 +62,11 @@ extension AroundMeData: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         let status = manager.authorizationStatus
         switch status {
-        case .notDetermined, .restricted, .denied:
+        case .notDetermined:
             hasPermission = false
             manager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            hasPermission = false
         case .authorizedAlways, .authorizedWhenInUse:
             hasPermission = true
         @unknown default:

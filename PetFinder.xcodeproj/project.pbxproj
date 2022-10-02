@@ -15,6 +15,7 @@
 		433D262628D8236C00746B11 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D262528D8236C00746B11 /* Pet.swift */; };
 		433D262E28D8AB8E00746B11 /* PetFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D262D28D8AB8E00746B11 /* PetFinderTests.swift */; };
 		433D263B28D8C9CD00746B11 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D263A28D8C9CD00746B11 /* User.swift */; };
+		434F276E28E90AA000A83C4C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434F276D28E90AA000A83C4C /* LocationManager.swift */; };
 		4350361528D8062D00BDE92E /* PetFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4350361428D8062D00BDE92E /* PetFinderApp.swift */; };
 		4350361728D8062D00BDE92E /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4350361628D8062D00BDE92E /* WelcomeView.swift */; };
 		4350361928D8062E00BDE92E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4350361828D8062E00BDE92E /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		433D262B28D8AB8E00746B11 /* PetFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		433D262D28D8AB8E00746B11 /* PetFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderTests.swift; sourceTree = "<group>"; };
 		433D263A28D8C9CD00746B11 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		434F276D28E90AA000A83C4C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		4350361128D8062D00BDE92E /* PetFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4350361428D8062D00BDE92E /* PetFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderApp.swift; sourceTree = "<group>"; };
 		4350361628D8062D00BDE92E /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				4333CB2E28DA93C800857AD0 /* Message.swift */,
 				435509D428E1E16E007FB344 /* PetData.swift */,
 				4329314428DBD39F003FA4EF /* AroundMeData.swift */,
+				434F276D28E90AA000A83C4C /* LocationManager.swift */,
 				4329314628DBD403003FA4EF /* SettingsData.swift */,
 			);
 			path = Model;
@@ -314,6 +317,7 @@
 				4329314728DBD403003FA4EF /* SettingsData.swift in Sources */,
 				435509D928E39C1C007FB344 /* Model.swift in Sources */,
 				4329314528DBD39F003FA4EF /* AroundMeData.swift in Sources */,
+				434F276E28E90AA000A83C4C /* LocationManager.swift in Sources */,
 				4329314B28DBD71A003FA4EF /* MessageViewModel.swift in Sources */,
 				4333CB2F28DA93C800857AD0 /* Message.swift in Sources */,
 				43D352E928DB78370036E80F /* PetCardListView.swift in Sources */,

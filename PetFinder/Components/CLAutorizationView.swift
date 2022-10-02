@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct CLAutorizationView: View {
+    @EnvironmentObject var aroundMeData: AroundMeData
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color(.white)
+            Image("Pet3")
+                .opacity(0.4)
+                .blur(radius: 10)
+            Text("Pet Finder")
+                .font(.largeTitle)
+        }
     }
 }
 
