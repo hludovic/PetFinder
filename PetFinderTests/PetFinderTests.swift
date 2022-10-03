@@ -42,9 +42,9 @@ final class PetFinderTests: XCTestCase {
 //            try await pet.isLost(pet: myPet.id)
 //        }
         
-        let dataManager = AroundMeData()
-        print(dataManager.petsAround.count)
-        await dataManager.fetchMissingPetsAround()
-        print(dataManager.petsAround.count)
+//        let dataManager = AroundMeData()
+//        print(dataManager.petsAround.count)
+//        await dataManager.fetchMissingPetsAround()
+//        print(dataManager.petsAround.count)
     }
 }

@@ -23,35 +23,32 @@ struct PetCardListView: View {
             .navigationTitle("Around Me")
             .toolbar {
                 Picker(selection: $aroundMeData.range) {
-                    Label("Radius 1 km", systemImage: "mappin.and.ellipse")
-                        .tag(AroundMeData.Range.r1km)
-                    Label("Radius 5 km", systemImage: "mappin.and.ellipse")
-                        .tag(AroundMeData.Range.r5km)
-                    Label("Radius 10 km", systemImage: "mappin.and.ellipse")
-                        .tag(AroundMeData.Range.r10km)
-                    Label("Radius 50 km", systemImage: "mappin.and.ellipse")
-                        .tag(AroundMeData.Range.r50km)
+                    ForEach(AroundMeData.Radius.allCases) { radius in
+                        Label(radius.name, systemImage: "mappin.and.ellipse")
+                            .tag(radius)
+                    }
                 } label: {
-                    Label("Range", systemImage: "mappin.and.ellipse")
+                    Label("Radius", systemImage: "mappin.and.ellipse")
                 }
                 .onReceive(aroundMeData.$range) { _ in
                     Task {
-                        let location = locationManager.location
-                        await aroundMeData.fetchMissingPetsAround(location: location)
+                        await aroundMeData.loadData(from: locationManager.location)
                     }
                 }
                 .onAppear{
                     Task {
-                        let location = locationManager.location
-                        await aroundMeData.fetchMissingPetsAround(location: location)
+                        await aroundMeData.loadData(from: locationManager.location)
                     }
                 }
             }
-
+            .alert(aroundMeData.alertMessage ?? "Error", isPresented: $aroundMeData.alert) {
+                Button("OK") {
+                    aroundMeData.resetAlertMessage()
+                }
+            }
         }
         .refreshable {
-            let location = locationManager.location
-            await aroundMeData.fetchMissingPetsAround(location: location)
+            await aroundMeData.loadData(from: locationManager.location)
         }
     }
 }

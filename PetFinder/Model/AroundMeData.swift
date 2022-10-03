@@ -9,28 +9,44 @@ import SwiftUI
 import CloudKit
 
 class AroundMeData: ObservableObject {
-    @Published var petsAround: [Pet] = []
-    @Published var range: Range = .r50km
+    @Published private(set) var petsAround: [Pet] = []
+    @Published var range: Radius = .r50km
+    @Published var alert: Bool = false
+    @Published private(set) var alertMessage: String?
     
-    func fetchMissingPetsAround(location: CLLocationCoordinate2D?) async {
-        guard let location else { return print("ERROR") }
+    func loadData(from location: CLLocationCoordinate2D?) async {
+        guard let location else {
+            return await displayError(message: "No location", error: nil)
+        }
         let locationToFetch = CLLocation(latitude: location.latitude, longitude: location.longitude)
         
         let pets: [Pet]
         do {
             pets = try await fetchMissingPetsAround(location: locationToFetch, radiusInMeters: range)
-        } catch let error { return print(error.localizedDescription) }
+        } catch let error {
+            return await displayError(message: error.localizedDescription, error: error)
+        }
         await MainActor.run{
             petsAround = pets
         }
+    }
+    
+    func resetAlertMessage() {
+        alertMessage = nil
     }
 }
 
 // MARK: - Private methods
 extension AroundMeData {
-    private func fetchMissingPetsAround(location: CLLocation, radiusInMeters: Range) async throws -> [Pet] {
+    @MainActor private func displayError(message: String, error: Error?) {
+        alert = true
+        alertMessage = message
+        print(message)
+    }
+    
+    private func fetchMissingPetsAround(location: CLLocation, radiusInMeters: Radius) async throws -> [Pet] {
         var pets: [Pet] = []
-        let predicate = NSPredicate(format: "distanceToLocation:fromLocation:(location, %@) < %f", location, radiusInMeters.rawValue)
+        let predicate = NSPredicate(format: "distanceToLocation:fromLocation:(location, %@) < %f", location, radiusInMeters.value)
         let query = CKQuery(recordType: "Pets", predicate: predicate)
         let (values, _) = try await Model.database.records(matching: query, desiredKeys: ["user", "name", "gender", "type", "race", "birthDay", "location", "dateLost"])
         for value in values {
@@ -61,13 +77,29 @@ extension AroundMeData {
         }
         return pets
     }
-    
-    enum Range: CGFloat, CaseIterable, Identifiable {
-        var id: CGFloat { self.rawValue }
-        case r1km = 1000
-        case r5km = 5000
-        case r10km = 10000
-        case r50km = 50000
-    }
 }
 
+// MARK: - The Radius
+extension AroundMeData {
+    enum Radius: Int, CaseIterable, Identifiable {
+        case r5km, r10km, r50km
+        
+        var id: Int { self.rawValue }
+        
+        var name: String {
+            switch self {
+            case .r5km: return "Radius 5 km"
+            case .r10km: return "Radius 10 km"
+            case .r50km: return "Radius 50 km"
+            }
+        }
+        
+        var value: CGFloat {
+            switch self {
+            case .r5km: return 5000
+            case .r10km: return 10000
+            case .r50km: return 50000
+            }
+        }
+    }
+}

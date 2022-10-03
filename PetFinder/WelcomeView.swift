@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  WelcomeView.swift
 //  PetFinder
 //
 //  Created by Ludovic HENRY on 18/09/2022.

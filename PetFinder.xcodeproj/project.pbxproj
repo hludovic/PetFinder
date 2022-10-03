@@ -24,6 +24,8 @@
 		435509D728E24A3C007FB344 /* AroundMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435509D628E24A3C007FB344 /* AroundMeTests.swift */; };
 		435509D928E39C1C007FB344 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435509D828E39C1C007FB344 /* Model.swift */; };
 		435509DC28E3A0DC007FB344 /* CloudStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435509DB28E3A0DC007FB344 /* CloudStatusView.swift */; };
+		43AD5A0128EA7C9B006A856A /* CLAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD5A0028EA7C9B006A856A /* CLAuthorizationView.swift */; };
+		43AD5A0328EA7DFD006A856A /* CLErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD5A0228EA7DFD006A856A /* CLErrorView.swift */; };
 		43C61AA228DAB5D0001D3E51 /* AroundMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C61AA128DAB5D0001D3E51 /* AroundMeView.swift */; };
 		43C61AA428DAB5F3001D3E51 /* MyPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C61AA328DAB5F3001D3E51 /* MyPetsView.swift */; };
 		43C61AA628DAB64D001D3E51 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C61AA528DAB64D001D3E51 /* SettingsView.swift */; };
@@ -63,6 +65,8 @@
 		435509D628E24A3C007FB344 /* AroundMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundMeTests.swift; sourceTree = "<group>"; };
 		435509D828E39C1C007FB344 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		435509DB28E3A0DC007FB344 /* CloudStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStatusView.swift; sourceTree = "<group>"; };
+		43AD5A0028EA7C9B006A856A /* CLAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLAuthorizationView.swift; sourceTree = "<group>"; };
+		43AD5A0228EA7DFD006A856A /* CLErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLErrorView.swift; sourceTree = "<group>"; };
 		43C61AA128DAB5D0001D3E51 /* AroundMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundMeView.swift; sourceTree = "<group>"; };
 		43C61AA328DAB5F3001D3E51 /* MyPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPetsView.swift; sourceTree = "<group>"; };
 		43C61AA528DAB64D001D3E51 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 			isa = PBXGroup;
 			children = (
 				435509DB28E3A0DC007FB344 /* CloudStatusView.swift */,
+				43AD5A0028EA7C9B006A856A /* CLAuthorizationView.swift */,
+				43AD5A0228EA7DFD006A856A /* CLErrorView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -311,12 +317,14 @@
 				43D352E528DAC2E40036E80F /* PreviewMockedData.swift in Sources */,
 				43C61AA228DAB5D0001D3E51 /* AroundMeView.swift in Sources */,
 				4329314728DBD403003FA4EF /* SettingsData.swift in Sources */,
+				43AD5A0328EA7DFD006A856A /* CLErrorView.swift in Sources */,
 				435509D928E39C1C007FB344 /* Model.swift in Sources */,
 				4329314528DBD39F003FA4EF /* AroundMeData.swift in Sources */,
 				434F276E28E90AA000A83C4C /* LocationManager.swift in Sources */,
 				4329314B28DBD71A003FA4EF /* MessageViewModel.swift in Sources */,
 				4333CB2F28DA93C800857AD0 /* Message.swift in Sources */,
 				43D352E928DB78370036E80F /* PetCardListView.swift in Sources */,
+				43AD5A0128EA7C9B006A856A /* CLAuthorizationView.swift in Sources */,
 				435509D528E1E16E007FB344 /* PetData.swift in Sources */,
 				4350361528D8062D00BDE92E /* PetFinderApp.swift in Sources */,
 				43C61AA628DAB64D001D3E51 /* SettingsView.swift in Sources */,

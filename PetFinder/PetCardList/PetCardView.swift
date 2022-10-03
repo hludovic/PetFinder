@@ -1,5 +1,5 @@
 //
-//  PetCellView.swift
+//  PetCardView.swift
 //  PetFinder
 //
 //  Created by Ludovic HENRY on 20/09/2022.
@@ -45,10 +45,10 @@ struct PetCardView: View {
         }
         .background(Color("CellBackgroundColor"))
         .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255, opacity: 0.1), lineWidth: 1)
-        )
+//        .overlay(
+//            RoundedRectangle(cornerRadius: 10)
+//                .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255, opacity: 0.1), lineWidth: 1)
+//        )
         .shadow(radius: 5)
         .onAppear {
             Task {
