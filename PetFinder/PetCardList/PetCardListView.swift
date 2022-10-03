@@ -30,11 +30,6 @@ struct PetCardListView: View {
                 } label: {
                     Label("Radius", systemImage: "mappin.and.ellipse")
                 }
-                .onReceive(aroundMeData.$range) { _ in
-                    Task {
-                        await aroundMeData.loadData(from: locationManager.location)
-                    }
-                }
                 .onAppear{
                     Task {
                         await aroundMeData.loadData(from: locationManager.location)
@@ -45,6 +40,11 @@ struct PetCardListView: View {
                 Button("OK") {
                     aroundMeData.resetAlertMessage()
                 }
+            }
+        }
+        .onChange(of: aroundMeData.range) { newValue in
+            Task {
+                await aroundMeData.loadData(from: locationManager.location)
             }
         }
         .refreshable {

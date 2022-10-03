@@ -13,6 +13,11 @@ final class PetFinderTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
+
+    override func setUp() async throws {
+        _ = try await PreviewMockedData.uploadMissingPets()
+        try await Task.sleep(nanoseconds: 3_000_000_000)
+    }
     
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
@@ -25,26 +30,9 @@ final class PetFinderTests: XCTestCase {
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
         
-//        let pet = PetTest()
-//        _ = try await pet.uploadMissingPets()
-//        try await pet.makeAllPetsMissing()
-//        let mypets = try await pet.fetchMyPets()
-//        print("AAA")
-//        print(mypets.count)
-        
-//        let alerts = try await pet.fetchMyAlerts()
-//        print(alerts.count)
-        
-//        let myPets = try await pet.fetchMyPets()
-//        print(myPets)
-//        try await myPets.first?.photo
-//        for myPet in myPets {
-//            try await pet.isLost(pet: myPet.id)
-//        }
-        
-//        let dataManager = AroundMeData()
-//        print(dataManager.petsAround.count)
-//        await dataManager.fetchMissingPetsAround()
-//        print(dataManager.petsAround.count)
+        let aroundDataManager = AroundMeData()
+        let myLocation = PreviewMockedData.myLocation
+        await aroundDataManager.loadData(from: myLocation)
+        XCTAssertEqual(aroundDataManager.petsAround.count, 3)
     }
 }

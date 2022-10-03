@@ -7,26 +7,30 @@
 
 import SwiftUI
 import CloudKit
+import os
 
 class AroundMeData: ObservableObject {
     @Published private(set) var petsAround: [Pet] = []
     @Published var range: Radius = .r50km
     @Published var alert: Bool = false
     @Published private(set) var alertMessage: String?
+    private static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: AroundMeData.self))
     
     func loadData(from location: CLLocationCoordinate2D?) async {
+        Self.logger.trace("Start fetching Pets around my location")
         guard let location else {
-            return await displayError(message: "No location", error: nil)
+            Self.logger.warning("No location stored when trying to fetch the pets around")
+            return await displayError(message: "Fail, No location")
         }
         let locationToFetch = CLLocation(latitude: location.latitude, longitude: location.longitude)
-        
         let pets: [Pet]
         do {
             pets = try await fetchMissingPetsAround(location: locationToFetch, radiusInMeters: range)
         } catch let error {
-            return await displayError(message: error.localizedDescription, error: error)
+            return await displayError(message: error.localizedDescription)
         }
         await MainActor.run{
+            Self.logger.notice("Load data Finished")
             petsAround = pets
         }
     }
@@ -38,10 +42,9 @@ class AroundMeData: ObservableObject {
 
 // MARK: - Private methods
 extension AroundMeData {
-    @MainActor private func displayError(message: String, error: Error?) {
+    @MainActor private func displayError(message: String) {
         alert = true
         alertMessage = message
-        print(message)
     }
     
     private func fetchMissingPetsAround(location: CLLocation, radiusInMeters: Radius) async throws -> [Pet] {
