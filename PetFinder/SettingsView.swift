@@ -13,6 +13,7 @@ struct SettingsView: View {
     @State var cloudDescription: String = "Online"
     @State var toggle1: Bool = false
     @State var toggle2: Bool = true
+    @State var showingEditSheet: Bool = false
     
     var body: some View {
         NavigationView {
@@ -22,12 +23,11 @@ struct SettingsView: View {
                         pseudonymText()
                         Spacer()
                         Button("Edit") {
-                            print("edit")
+                            showingEditSheet.toggle()
                         }
                         .buttonStyle(.borderless)
                     }
                 }
-                
                 Section("CloudKit Status") {
                     HStack {
                         Text(cloudDescription)
@@ -35,7 +35,6 @@ struct SettingsView: View {
                         CloudStatusView(status: $cloudStatus)
                     }
                 }
-                
                 Section {
                     Text("Blocked users")
                     Toggle("Allows notifications", isOn: $toggle1)
@@ -43,7 +42,6 @@ struct SettingsView: View {
                 } header: {
                     Text("Security")
                 }
-                
                 Section {
                     HStack {
                         Text("Location status description")
@@ -56,8 +54,10 @@ struct SettingsView: View {
                 } footer: {
                     Text("To allow location go to settings -> Loction -> Enable to allows it Ok ?")
                 }
-
-                
+            }
+            .sheet(isPresented: $showingEditSheet) {
+                EditPseudoView()
+                    .presentationDetents([.medium])
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)

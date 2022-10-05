@@ -83,7 +83,7 @@ struct PreviewMockedData {
                 name: "Felix",
                 gender: Pet.Gender.male.rawValue,
                 type: Pet.PetType.cat.rawValue,
-                race: Pet.DogRace.english_springer_spaniel.rawValue,
+                race: Pet.DogRace.english_springer_spaniel.name,
                 dateLost: dateCreator(year: 2022, month: 3, day: 9),
                 birthDay: dateCreator(year: 2020, month: 1, day: 4),
                 location: CLLocation(latitude: 16.261587307523747, longitude: -61.62137873321357)
@@ -93,7 +93,7 @@ struct PreviewMockedData {
                 name: "Martin",
                 gender: Pet.Gender.female.rawValue,
                 type: Pet.PetType.dog.rawValue,
-                race: Pet.DogRace.border_collie.rawValue,
+                race: Pet.DogRace.border_collie.name,
                 dateLost: dateCreator(year: 2022, month: 2, day: 10),
                 birthDay: dateCreator(year: 2021, month: 7, day: 12),
                 location: CLLocation(latitude: 16.04076861022844, longitude: -61.60101545693777)
@@ -103,7 +103,7 @@ struct PreviewMockedData {
                 name: "Woofy",
                 gender: Pet.Gender.male.rawValue,
                 type: Pet.PetType.dog.rawValue,
-                race: Pet.DogRace.german_shorthaired_pointer.rawValue,
+                race: Pet.DogRace.german_shorthaired_pointer.name,
                 dateLost: dateCreator(year: 2022, month: 1, day: 4),
                 birthDay: dateCreator(year: 2022, month: 5, day: 23),
                 location: CLLocation(latitude: 16.258563662672728, longitude: -61.272922369971425)

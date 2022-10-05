@@ -21,7 +21,7 @@ struct WelcomeView: View {
                 .tabItem { Label("My Pets", systemImage: "pawprint") }
                 .tag(1)
             SettingsView()
-                .tabItem { Label("Settings", systemImage: "person") }
+                .tabItem { Label("Settings", systemImage: "slider.horizontal.3") }
                 .tag(2)
         }
     }

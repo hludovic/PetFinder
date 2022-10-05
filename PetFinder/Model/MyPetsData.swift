@@ -1,5 +1,5 @@
 //
-//  MyPetsViewModel.swift
+//  MyPetsData.swift
 //  PetFinder
 //
 //  Created by Ludovic HENRY on 21/09/2022.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class MyPetsViewModel {
+class MyPetsData {
     static func getUserPets() async throws -> [Pet] { return [] }
     
     static func removePet(_ pet: Pet.ID) async throws { }
