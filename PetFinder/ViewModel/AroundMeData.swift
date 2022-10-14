@@ -14,8 +14,8 @@ class AroundMeData: NSObject, ObservableObject {
     @Published var range: Radius = .r50km { didSet { Task { await loadData() } } }
     @Published var alert: Bool = false
     @Published private(set) var alertMessage: String?
+    @Published var authorizationStatus: CLAuthorizationStatus
     private let locationManager: CLLocationManager
-    var authorizationStatus: CLAuthorizationStatus
     var location: CLLocationCoordinate2D = CLLocationCoordinate2D()
     private static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: AroundMeData.self))
     
