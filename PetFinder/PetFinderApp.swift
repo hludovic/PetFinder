@@ -9,14 +9,16 @@ import SwiftUI
 
 @main
 struct PetFinderApp: App {
+    @Environment(\.scenePhase) private var scenePhase
     @StateObject var aroundMeData = AroundMeData()
-    @StateObject var locationManager = LocationManager()
 
     var body: some Scene {
         WindowGroup {
             WelcomeView()
                 .environmentObject(aroundMeData)
-                .environmentObject(locationManager)
+                .onChange(of: scenePhase) { newLocation in
+                    if newLocation == .active { aroundMeData.startUpdatingMyLocation() }
+                }
         }
     }
 }

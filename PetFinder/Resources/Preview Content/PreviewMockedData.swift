@@ -31,7 +31,7 @@ struct PreviewMockedData {
             "location": CLLocation(latitude: 16.261587307523747, longitude: -61.62137873321357),
             "name" : "Felix",
             "photo" : CKAsset(fileURL: localeURL(forImageNamed: "Pet1")!),
-            "race" : Pet.DogRace.english_springer_spaniel.rawValue,
+            "race" : Pet.DogRace.english_springer_spaniel.name,
             "type" : Pet.PetType.cat.rawValue,
             "user" : CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
         ])
@@ -43,7 +43,7 @@ struct PreviewMockedData {
             "location": CLLocation(latitude: 16.04076861022844, longitude: -61.60101545693777),
             "name" : "Martin",
             "photo" : CKAsset(fileURL: localeURL(forImageNamed: "Pet2")!),
-            "race" : Pet.DogRace.border_collie.rawValue,
+            "race" : Pet.DogRace.border_collie.name,
             "type" : Pet.PetType.dog.rawValue,
             "user" : CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
         ])
@@ -55,7 +55,7 @@ struct PreviewMockedData {
             "location": CLLocation(latitude: 16.258563662672728, longitude: -61.272922369971425),
             "name" : "Woofy",
             "photo" : CKAsset(fileURL: localeURL(forImageNamed: "Pet3")!),
-            "race" : Pet.DogRace.german_shorthaired_pointer.rawValue,
+            "race" : Pet.DogRace.german_shorthaired_pointer.name,
             "type" : Pet.PetType.dog.rawValue,
             "user" : CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
         ])

@@ -5,23 +5,37 @@
 //  Created by Ludovic HENRY on 21/09/2022.
 //
 
-import SwiftUI
 import CloudKit
+import CoreLocation
 import os
 
-class AroundMeData: ObservableObject {
+class AroundMeData: NSObject, ObservableObject {
     @Published private(set) var petsAround: [Pet] = []
-    @Published var range: Radius = .r50km
+    @Published var range: Radius = .r50km { didSet { Task { await loadData() } } }
     @Published var alert: Bool = false
     @Published private(set) var alertMessage: String?
+    private let locationManager: CLLocationManager
+    var authorizationStatus: CLAuthorizationStatus
+    var location: CLLocationCoordinate2D = CLLocationCoordinate2D()
     private static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: AroundMeData.self))
     
-    func loadData(from location: CLLocationCoordinate2D?) async {
-        Self.logger.trace("Start fetching Pets around my location")
-        guard let location else {
-            Self.logger.warning("No location stored when trying to fetch the pets around")
-            return await displayError(message: "Fail, No location")
+    override init() {
+        self.locationManager = CLLocationManager()
+        self.authorizationStatus = locationManager.authorizationStatus
+        super.init()
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+    }
+    
+    func startUpdatingMyLocation() {
+        if authorizationStatus == .authorizedWhenInUse {
+            Self.logger.trace("Start requesting locations")
+            locationManager.delegate = self
+            locationManager.requestLocation()
         }
+    }
+    
+    func loadData() async {
+        Self.logger.trace("Start Loading the Data")
         let locationToFetch = CLLocation(latitude: location.latitude, longitude: location.longitude)
         let pets: [Pet]
         do {
@@ -35,6 +49,12 @@ class AroundMeData: ObservableObject {
         }
     }
     
+    func requestAuthorization() {
+        Self.logger.trace("Start requesting \"When in use\" authorization")
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
     func resetAlertMessage() {
         alertMessage = nil
     }
@@ -43,8 +63,8 @@ class AroundMeData: ObservableObject {
 // MARK: - Private methods
 extension AroundMeData {
     @MainActor private func displayError(message: String) {
-        alert = true
         alertMessage = message
+        alert = true
     }
     
     private func fetchMissingPetsAround(location: CLLocation, radiusInMeters: Radius) async throws -> [Pet] {
@@ -105,4 +125,28 @@ extension AroundMeData {
             }
         }
     }
+}
+
+// MARK: - Core Location Manager Delegate
+extension AroundMeData: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        Self.logger.warning("\(error.localizedDescription)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        Self.logger.trace("Stop requesting locations")
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
+        guard let newLocation = locations.first else {
+            return print("Error")
+        }
+        Self.logger.trace("Update location")
+        location = newLocation.coordinate
+        Task { await loadData() }
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        authorizationStatus = manager.authorizationStatus
+    }
+
 }

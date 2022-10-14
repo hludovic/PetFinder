@@ -11,11 +11,11 @@ import os
 
 class PetData: ObservableObject {
     @Published var isRedacted: Bool = true
-    @Published var petName: String = "petName"
-    @Published var dateLost: String
-    @Published var imageURL: URL? = nil
     @Published var alert: Bool = false
-    @Published var alertMessage: String? = nil
+    @Published private(set) var petName: String = "petName"
+    @Published private(set) var dateLost: String
+    @Published private(set) var imageURL: URL? = nil
+    @Published private(set) var alertMessage: String? = nil
     public static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: PetData.self))
     private var pet: Pet
     

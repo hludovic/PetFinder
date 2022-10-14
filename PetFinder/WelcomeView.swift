@@ -30,13 +30,12 @@ struct WelcomeView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let previewData = AroundMeData()
-        let locationManager = LocationManager()
         WelcomeView()
             .environmentObject(previewData)
-            .environmentObject(locationManager)
             .onAppear{
-                locationManager.authorizationStatus = .authorizedWhenInUse
-                locationManager.location = PreviewMockedData.myLocation
+                previewData.authorizationStatus = .authorizedWhenInUse
+                previewData.location = PreviewMockedData.myLocation
+                Task { await previewData.loadData() }
             }
     }
 }

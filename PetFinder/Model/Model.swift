@@ -12,11 +12,12 @@ class Model {
     static let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
     static let database = container.publicCloudDatabase
     
-    static var CKUserRecordID: CKRecord.ID {
-        get async throws {
-            try await container.userRecordID()
-        }
-    }
+//    static var CKUserRecordID: CKRecord.ID {
+//        get async throws {
+//            try await container.userRecordID()
+//        }
+//    }
+    
     
     static func CKAccountStatus() async -> (Bool, String) {
         let accountStatus: CKAccountStatus

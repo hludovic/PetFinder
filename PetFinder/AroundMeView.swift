@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct AroundMeView: View {
-    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var viewModel: AroundMeData
     
     var body: some View {
-        switch locationManager.authorizationStatus {
+        switch viewModel.authorizationStatus {
         case .notDetermined:
             CLAuthorizationView()
         case .restricted:
@@ -29,13 +29,12 @@ struct AroundMeView: View {
 struct AroundMeView_Previews: PreviewProvider {
     static var previews: some View {
         let previewData = AroundMeData()
-        let locationManager = LocationManager()
         AroundMeView()
             .environmentObject(previewData)
-            .environmentObject(locationManager)
             .onAppear{
-                locationManager.authorizationStatus = .authorizedWhenInUse
-                locationManager.location = PreviewMockedData.myLocation
+                previewData.authorizationStatus = .authorizedAlways
+                previewData.location = PreviewMockedData.myLocation
+                Task { await previewData.loadData() }
             }
     }
 }

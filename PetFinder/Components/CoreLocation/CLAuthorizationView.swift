@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct CLAuthorizationView: View {
-    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var aroundMeData: AroundMeData
     
     var body: some View {
         VStack {
             Button(action: {
-                locationManager.requestAuthorization()
+                aroundMeData.requestAuthorization()
             }, label: {
                 Label("Allow tracking", systemImage: "location")
             })
