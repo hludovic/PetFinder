@@ -11,13 +11,11 @@ import CloudKit
 class Model {
     static let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
     static let database = container.publicCloudDatabase
-    
+
     static var CKUserRecordID: CKRecord.ID {
-        get async throws {
-            try await container.userRecordID()
-        }
+        get async throws { try await container.userRecordID() }
     }
-    
+
     static func CKAccountStatus() async -> (Bool, String) {
         let accountStatus: CKAccountStatus
         do {
@@ -57,5 +55,4 @@ extension ModelError: LocalizedError {
             return "Unable to cast the type of the data fetched"
         }
     }
-    
 }

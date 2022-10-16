@@ -14,7 +14,7 @@ struct SettingsView: View {
     @State var toggle1: Bool = false
     @State var toggle2: Bool = true
     @State var showingEditSheet: Bool = false
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -63,7 +63,7 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
     }
-    
+
     func pseudonymText() -> Text {
         if let pseudo = pseudonym {
             return Text(pseudo)

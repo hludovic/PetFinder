@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CloudStatusView: View {
     @Binding var status: Bool?
-    
+
     var body: some View {
         VStack {
             if status == nil {

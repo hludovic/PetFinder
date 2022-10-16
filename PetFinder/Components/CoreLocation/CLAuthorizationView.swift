@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CLAuthorizationView: View {
     @EnvironmentObject var aroundMeData: AroundMeData
-    
+
     var body: some View {
         VStack {
             Button(action: {

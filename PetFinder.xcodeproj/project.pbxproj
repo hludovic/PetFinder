@@ -11,13 +11,14 @@
 		4329314728DBD403003FA4EF /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4329314628DBD403003FA4EF /* SettingsData.swift */; };
 		4329314928DBD468003FA4EF /* MyPetsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4329314828DBD468003FA4EF /* MyPetsData.swift */; };
 		4333CB2F28DA93C800857AD0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4333CB2E28DA93C800857AD0 /* Message.swift */; };
-		433D262628D8236C00746B11 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D262528D8236C00746B11 /* Pet.swift */; };
+		433D262628D8236C00746B11 /* PetLost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D262528D8236C00746B11 /* PetLost.swift */; };
 		433D262E28D8AB8E00746B11 /* PetFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D262D28D8AB8E00746B11 /* PetFinderTests.swift */; };
 		433D263B28D8C9CD00746B11 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D263A28D8C9CD00746B11 /* User.swift */; };
 		4350361528D8062D00BDE92E /* PetFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4350361428D8062D00BDE92E /* PetFinderApp.swift */; };
 		4350361728D8062D00BDE92E /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4350361628D8062D00BDE92E /* WelcomeView.swift */; };
 		4350361928D8062E00BDE92E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4350361828D8062E00BDE92E /* Assets.xcassets */; };
 		4350361C28D8062E00BDE92E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4350361B28D8062E00BDE92E /* Preview Assets.xcassets */; };
+		4350F9FB28FC662900D6D8A0 /* PetOwned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4350F9FA28FC662900D6D8A0 /* PetOwned.swift */; };
 		435509D528E1E16E007FB344 /* PetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435509D428E1E16E007FB344 /* PetData.swift */; };
 		435509D728E24A3C007FB344 /* AroundMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435509D628E24A3C007FB344 /* AroundMeTests.swift */; };
 		435509D928E39C1C007FB344 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435509D828E39C1C007FB344 /* Model.swift */; };
@@ -51,7 +52,7 @@
 		4329314828DBD468003FA4EF /* MyPetsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPetsData.swift; sourceTree = "<group>"; };
 		4333CB2E28DA93C800857AD0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		433D262428D8095E00746B11 /* PetFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PetFinder.entitlements; sourceTree = "<group>"; };
-		433D262528D8236C00746B11 /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
+		433D262528D8236C00746B11 /* PetLost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetLost.swift; sourceTree = "<group>"; };
 		433D262B28D8AB8E00746B11 /* PetFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		433D262D28D8AB8E00746B11 /* PetFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderTests.swift; sourceTree = "<group>"; };
 		433D263A28D8C9CD00746B11 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 		4350361628D8062D00BDE92E /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		4350361828D8062E00BDE92E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4350361B28D8062E00BDE92E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4350F9FA28FC662900D6D8A0 /* PetOwned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetOwned.swift; sourceTree = "<group>"; };
 		435509D428E1E16E007FB344 /* PetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetData.swift; sourceTree = "<group>"; };
 		435509D628E24A3C007FB344 /* AroundMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundMeTests.swift; sourceTree = "<group>"; };
 		435509D828E39C1C007FB344 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -121,7 +123,8 @@
 				435509D828E39C1C007FB344 /* Model.swift */,
 				439BF6E828F60E0700317ACF /* MyPetModel.xcdatamodeld */,
 				433D263A28D8C9CD00746B11 /* User.swift */,
-				433D262528D8236C00746B11 /* Pet.swift */,
+				433D262528D8236C00746B11 /* PetLost.swift */,
+				4350F9FA28FC662900D6D8A0 /* PetOwned.swift */,
 				4333CB2E28DA93C800857AD0 /* Message.swift */,
 			);
 			path = Model;
@@ -235,6 +238,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4350361F28D8062E00BDE92E /* Build configuration list for PBXNativeTarget "PetFinder" */;
 			buildPhases = (
+				4350F9FD28FC74F700D6D8A0 /* ShellScript */,
 				4350360D28D8062D00BDE92E /* Sources */,
 				4350360E28D8062D00BDE92E /* Frameworks */,
 				4350360F28D8062D00BDE92E /* Resources */,
@@ -305,6 +309,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4350F9FD28FC74F700D6D8A0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		433D262728D8AB8E00746B11 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -319,7 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				433D262628D8236C00746B11 /* Pet.swift in Sources */,
+				433D262628D8236C00746B11 /* PetLost.swift in Sources */,
 				433D263B28D8C9CD00746B11 /* User.swift in Sources */,
 				43DF93A928ED3688001C8858 /* EditPseudoView.swift in Sources */,
 				4350361728D8062D00BDE92E /* WelcomeView.swift in Sources */,
@@ -339,6 +364,7 @@
 				435509D528E1E16E007FB344 /* PetData.swift in Sources */,
 				43DF93A628ECDAB6001C8858 /* EditPetView.swift in Sources */,
 				4350361528D8062D00BDE92E /* PetFinderApp.swift in Sources */,
+				4350F9FB28FC662900D6D8A0 /* PetOwned.swift in Sources */,
 				43C61AA628DAB64D001D3E51 /* SettingsView.swift in Sources */,
 				4329314928DBD468003FA4EF /* MyPetsData.swift in Sources */,
 			);

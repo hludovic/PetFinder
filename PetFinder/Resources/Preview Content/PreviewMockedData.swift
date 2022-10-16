@@ -12,56 +12,56 @@ import CoreLocation
 
 struct PreviewMockedData {
     static var myLocation: CLLocationCoordinate2D {
-        let location = CLLocation(latitude:16.255072, longitude: -61.653711)
+        let location = CLLocation(latitude: 16.255072, longitude: -61.653711)
         return location.coordinate
     }
-    
+
     static func uploadMissingPets() async throws -> [CKRecord] {
         let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
         let database = container.publicCloudDatabase
-        
+
         let record1 = CKRecord(recordType: "Pets")
         let record2 = CKRecord(recordType: "Pets")
         let record3 = CKRecord(recordType: "Pets")
-        
+
         record1.setValuesForKeys([
-            "birthDay" : dateCreator(year: 2020, month: 1, day: 4),
-            "dateLost" : dateCreator(year: 2022, month: 3, day: 9),
-            "gender" : Pet.Gender.male.rawValue,
+            "birthDay": dateCreator(year: 2020, month: 1, day: 4),
+            "dateLost": dateCreator(year: 2022, month: 3, day: 9),
+            "gender": PetLost.Gender.male.rawValue,
             "location": CLLocation(latitude: 16.261587307523747, longitude: -61.62137873321357),
-            "name" : "Felix",
-            "photo" : CKAsset(fileURL: localeURL(forImageNamed: "Pet1")!),
-            "race" : Pet.DogRace.english_springer_spaniel.name,
-            "type" : Pet.PetType.cat.rawValue,
-            "user" : CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
+            "name": "Felix",
+            "photo": CKAsset(fileURL: localeURL(forImageNamed: "Pet1")!),
+            "race": PetLost.DogRace.englishSpringerSpaniel.name,
+            "type": PetLost.PetType.cat.rawValue,
+            "user": CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
         ])
-        
+
         record2.setValuesForKeys([
-            "birthDay" : dateCreator(year: 2021, month: 7, day: 12),
-            "dateLost" : dateCreator(year: 2022, month: 2, day: 10),
-            "gender" : Pet.Gender.female.rawValue,
+            "birthDay": dateCreator(year: 2021, month: 7, day: 12),
+            "dateLost": dateCreator(year: 2022, month: 2, day: 10),
+            "gender": PetLost.Gender.female.rawValue,
             "location": CLLocation(latitude: 16.04076861022844, longitude: -61.60101545693777),
-            "name" : "Martin",
-            "photo" : CKAsset(fileURL: localeURL(forImageNamed: "Pet2")!),
-            "race" : Pet.DogRace.border_collie.name,
-            "type" : Pet.PetType.dog.rawValue,
-            "user" : CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
+            "name": "Martin",
+            "photo": CKAsset(fileURL: localeURL(forImageNamed: "Pet2")!),
+            "race": PetLost.DogRace.borderCollie.name,
+            "type": PetLost.PetType.dog.rawValue,
+            "user": CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
         ])
-        
+
         record3.setValuesForKeys([
-            "birthDay" : dateCreator(year: 2022, month: 5, day: 23),
-            "dateLost" : dateCreator(year: 2022, month: 1, day: 4),
-            "gender" : Pet.Gender.male.rawValue,
+            "birthDay": dateCreator(year: 2022, month: 5, day: 23),
+            "dateLost": dateCreator(year: 2022, month: 1, day: 4),
+            "gender": PetLost.Gender.male.rawValue,
             "location": CLLocation(latitude: 16.258563662672728, longitude: -61.272922369971425),
-            "name" : "Woofy",
-            "photo" : CKAsset(fileURL: localeURL(forImageNamed: "Pet3")!),
-            "race" : Pet.DogRace.german_shorthaired_pointer.name,
-            "type" : Pet.PetType.dog.rawValue,
-            "user" : CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
+            "name": "Woofy",
+            "photo": CKAsset(fileURL: localeURL(forImageNamed: "Pet3")!),
+            "race": PetLost.DogRace.germanShorthairedPointer.name,
+            "type": PetLost.PetType.dog.rawValue,
+            "user": CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
         ])
-        
+
         let accountStatus: CKAccountStatus = try await CKContainer.default().accountStatus()
-        
+
         if accountStatus == .noAccount {
             throw ModelError.noAccount
         } else {
@@ -75,52 +75,55 @@ struct PreviewMockedData {
             return savedRecords
         }
     }
-    
-    static func getFakePets() -> [Pet] {
+
+    static func getFakePets() -> [PetLost] {
         let pets = [
-            Pet(id: "001",
-                owner: "AAA",
-                name: "Felix",
-                gender: Pet.Gender.male.rawValue,
-                type: Pet.PetType.cat.rawValue,
-                race: Pet.DogRace.english_springer_spaniel.name,
-                dateLost: dateCreator(year: 2022, month: 3, day: 9),
-                birthDay: dateCreator(year: 2020, month: 1, day: 4),
-                location: CLLocation(latitude: 16.261587307523747, longitude: -61.62137873321357)
-               ),
-            Pet(id: "002",
-                owner: "BBB",
-                name: "Martin",
-                gender: Pet.Gender.female.rawValue,
-                type: Pet.PetType.dog.rawValue,
-                race: Pet.DogRace.border_collie.name,
-                dateLost: dateCreator(year: 2022, month: 2, day: 10),
-                birthDay: dateCreator(year: 2021, month: 7, day: 12),
-                location: CLLocation(latitude: 16.04076861022844, longitude: -61.60101545693777)
-               ),
-            Pet(id: "003",
-                owner: "CCC",
-                name: "Woofy",
-                gender: Pet.Gender.male.rawValue,
-                type: Pet.PetType.dog.rawValue,
-                race: Pet.DogRace.german_shorthaired_pointer.name,
-                dateLost: dateCreator(year: 2022, month: 1, day: 4),
-                birthDay: dateCreator(year: 2022, month: 5, day: 23),
-                location: CLLocation(latitude: 16.258563662672728, longitude: -61.272922369971425)
-               )
+            PetLost(id: "001",
+                    owner: "AAA",
+                    name: "Felix",
+                    gender: PetLost.Gender.male.rawValue,
+                    type: PetLost.PetType.cat.rawValue,
+                    race: PetLost.DogRace.englishSpringerSpaniel.name,
+                    dateLost: dateCreator(year: 2022, month: 3, day: 9),
+                    birthDay: dateCreator(year: 2020, month: 1, day: 4),
+                    location: CLLocation(latitude: 16.261587307523747, longitude: -61.62137873321357)
+                   ),
+            PetLost(id: "002",
+                    owner: "BBB",
+                    name: "Martin",
+                    gender: PetLost.Gender.female.rawValue,
+                    type: PetLost.PetType.dog.rawValue,
+                    race: PetLost.DogRace.borderCollie.name,
+                    dateLost: dateCreator(year: 2022, month: 2, day: 10),
+                    birthDay: dateCreator(year: 2021, month: 7, day: 12),
+                    location: CLLocation(latitude: 16.04076861022844, longitude: -61.60101545693777)
+                   ),
+            PetLost(id: "003",
+                    owner: "CCC",
+                    name: "Woofy",
+                    gender: PetLost.Gender.male.rawValue,
+                    type: PetLost.PetType.dog.rawValue,
+                    race: PetLost.DogRace.germanShorthairedPointer.name,
+                    dateLost: dateCreator(year: 2022, month: 1, day: 4),
+                    birthDay: dateCreator(year: 2022, month: 5, day: 23),
+                    location: CLLocation(latitude: 16.258563662672728, longitude: -61.272922369971425)
+                   )
         ]
         return pets
     }
-        
-    func fetchMyPets() async throws -> [Pet] {
-        var data: [Pet] = []
+
+    func fetchMyPets() async throws -> [PetLost] {
+        var data: [PetLost] = []
         let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
         let privateDB = container.publicCloudDatabase
         let myId = try await container.userRecordID()
         let predicate = NSPredicate(format: "___createdBy == %@", CKRecord.Reference(recordID: myId, action: .none))
         let query = CKQuery(recordType: "Pets", predicate: predicate)
-        let (values, _) = try await privateDB.records(matching: query, desiredKeys: ["user", "name", "gender", "type", "race", "birthDay", "location"], resultsLimit: 100)
-        
+        let (values, _) = try await privateDB.records(
+            matching: query, desiredKeys: ["user", "name", "gender", "type", "race", "birthDay", "location"],
+            resultsLimit: 100
+        )
+
         for value in values {
             if let record = try? value.1.get() {
                 guard
@@ -133,8 +136,8 @@ struct PreviewMockedData {
                     let birthDay = record["birthDay"] as? Date,
                     let location = record["location"] as? CLLocation
                 else { throw ModelError.typeCasting }
-                
-                let newPet = Pet(
+
+                let newPet = PetLost(
                     id: record.recordID.recordName,
                     owner: owner.recordID.recordName,
                     name: name,
@@ -161,22 +164,21 @@ private extension PreviewMockedData {
         component.day = day
         return component .date!
     }
-    
+
     static func localeURL(forImageNamed name: String) -> URL? {
         let fileManager = FileManager.default
         let cacheDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         let url = cacheDirectory.appendingPathComponent("\(name).jpg")
-        
+
         guard fileManager.fileExists(atPath: url.path) else {
             guard
                 let image = UIImage(named: name),
                 let data = image.jpegData(compressionQuality: 1.0)
             else { return nil }
-            
+
             fileManager.createFile(atPath: url.path, contents: data, attributes: nil)
             return url
         }
         return url
     }
 }
-

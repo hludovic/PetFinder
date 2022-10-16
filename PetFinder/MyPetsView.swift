@@ -9,9 +9,8 @@ import SwiftUI
 import CoreLocation
 import CoreLocationUI
 
-
 struct MyPetsView: View {
-    
+
     var body: some View {
         Text("My pets view")
     }

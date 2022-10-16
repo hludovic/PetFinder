@@ -10,7 +10,7 @@ import SwiftUI
 struct WelcomeView: View {
     @AppStorage("WelcomeViewCurrentTab") var selectedTab = 0
     @EnvironmentObject var aroundMeData: AroundMeData
-    
+
     var body: some View {
         TabView(selection: $selectedTab) {
             AroundMeView()
@@ -32,7 +32,7 @@ struct ContentView_Previews: PreviewProvider {
         let previewData = AroundMeData()
         WelcomeView()
             .environmentObject(previewData)
-            .onAppear{
+            .onAppear {
                 previewData.authorizationStatus = .authorizedWhenInUse
                 previewData.location = PreviewMockedData.myLocation
                 Task { await previewData.loadData() }

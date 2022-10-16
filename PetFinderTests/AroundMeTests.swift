@@ -9,17 +9,17 @@ import XCTest
 @testable import PetFinder
 
 final class AroundMeTests: XCTestCase {
-    
+
     func testNoDataIsLoaded_WhenLoadData_ThenAllPetsAround50kmIsLoaded() async throws {
         // Given
         let aroundDataManager = AroundMeData()
+        aroundDataManager.location = PreviewMockedData.myLocation
         _ = try await PreviewMockedData.uploadMissingPets()
         try await Task.sleep(nanoseconds: 2_000_000_000)
-        
+
         // When
-        let myLocation = PreviewMockedData.myLocation
-        await aroundDataManager.loadData(from: myLocation)
-        
+        await aroundDataManager.loadData()
+
         // Then
         XCTAssertEqual(aroundDataManager.petsAround.count, 3)
     }

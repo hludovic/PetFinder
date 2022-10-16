@@ -9,7 +9,7 @@ import Foundation
 import CloudKit
 
 struct Message {
-    let pet: Pet.ID
+    let pet: PetLost.ID
     let user: User.ID
     var isDeleted: Bool {
         get async throws { return true }

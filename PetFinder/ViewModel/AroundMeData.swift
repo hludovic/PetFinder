@@ -10,7 +10,7 @@ import CoreLocation
 import os
 
 class AroundMeData: NSObject, ObservableObject {
-    @Published private(set) var petsAround: [Pet] = []
+    @Published private(set) var petsAround: [PetLost] = []
     @Published var range: Radius = .r50km { didSet { Task { await loadData() } } }
     @Published var alert: Bool = false
     @Published private(set) var alertMessage: String?
@@ -18,14 +18,14 @@ class AroundMeData: NSObject, ObservableObject {
     private let locationManager: CLLocationManager
     var location: CLLocationCoordinate2D = CLLocationCoordinate2D()
     private static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: AroundMeData.self))
-    
+
     override init() {
         self.locationManager = CLLocationManager()
         self.authorizationStatus = locationManager.authorizationStatus
         super.init()
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
     }
-    
+
     func startUpdatingMyLocation() {
         if authorizationStatus == .authorizedWhenInUse {
             Self.logger.trace("Start requesting locations")
@@ -33,28 +33,28 @@ class AroundMeData: NSObject, ObservableObject {
             locationManager.requestLocation()
         }
     }
-    
+
     func loadData() async {
         Self.logger.trace("Start Loading the Data")
         let locationToFetch = CLLocation(latitude: location.latitude, longitude: location.longitude)
-        let pets: [Pet]
+        let pets: [PetLost]
         do {
             pets = try await fetchMissingPetsAround(location: locationToFetch, radiusInMeters: range)
         } catch let error {
             return await displayError(message: error.localizedDescription)
         }
-        await MainActor.run{
+        await MainActor.run {
             Self.logger.notice("Load data Finished")
             petsAround = pets
         }
     }
-    
+
     func requestAuthorization() {
         Self.logger.trace("Start requesting \"When in use\" authorization")
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
-    
+
     func resetAlertMessage() {
         alertMessage = nil
     }
@@ -66,12 +66,15 @@ extension AroundMeData {
         alertMessage = message
         alert = true
     }
-    
-    private func fetchMissingPetsAround(location: CLLocation, radiusInMeters: Radius) async throws -> [Pet] {
-        var pets: [Pet] = []
+
+    private func fetchMissingPetsAround(location: CLLocation, radiusInMeters: Radius) async throws -> [PetLost] {
+        var pets: [PetLost] = []
         let predicate = NSPredicate(format: "distanceToLocation:fromLocation:(location, %@) < %f", location, radiusInMeters.value)
         let query = CKQuery(recordType: "Pets", predicate: predicate)
-        let (values, _) = try await Model.database.records(matching: query, desiredKeys: ["user", "name", "gender", "type", "race", "birthDay", "location", "dateLost"])
+        let (values, _) = try await Model.database.records(
+            matching: query,
+            desiredKeys: ["user", "name", "gender", "type", "race", "birthDay", "location", "dateLost"]
+        )
         for value in values {
             if let record = try? value.1.get() {
                 guard
@@ -84,7 +87,7 @@ extension AroundMeData {
                     let birthDay = record["birthDay"] as? Date,
                     let location = record["location"] as? CLLocation
                 else { throw ModelError.typeCasting }
-                let newPet = Pet(
+                let newPet = PetLost(
                     id: record.recordID.recordName,
                     owner: owner.recordID.recordName,
                     name: name,
@@ -106,9 +109,9 @@ extension AroundMeData {
 extension AroundMeData {
     enum Radius: Int, CaseIterable, Identifiable {
         case r5km, r10km, r50km
-        
+
         var id: Int { self.rawValue }
-        
+
         var name: String {
             switch self {
             case .r5km: return "Radius 5 km"
@@ -116,7 +119,7 @@ extension AroundMeData {
             case .r50km: return "Radius 50 km"
             }
         }
-        
+
         var value: CGFloat {
             switch self {
             case .r5km: return 5000
@@ -132,7 +135,7 @@ extension AroundMeData: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         Self.logger.warning("\(error.localizedDescription)")
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         Self.logger.trace("Stop requesting locations")
         locationManager.stopUpdatingLocation()
@@ -144,7 +147,7 @@ extension AroundMeData: CLLocationManagerDelegate {
         location = newLocation.coordinate
         Task { await loadData() }
     }
-    
+
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorizationStatus = manager.authorizationStatus
     }

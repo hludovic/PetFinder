@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PetCardListView: View {
     @EnvironmentObject var aroundMeData: AroundMeData
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -47,7 +47,7 @@ struct PetListView_Previews: PreviewProvider {
         let previewData = AroundMeData()
         PetCardListView()
             .environmentObject(previewData)
-            .onAppear{
+            .onAppear {
                 previewData.location = PreviewMockedData.myLocation
                 Task { await previewData.loadData() }
             }

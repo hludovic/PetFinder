@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PetCardView: View {
     @StateObject var petData: PetData
-    
+
     var body: some View {
         VStack {
             AsyncImage(url: petData.imageURL) { image in
@@ -17,7 +17,7 @@ struct PetCardView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             } placeholder: {
-                ZStack{
+                ZStack {
                     Rectangle()
                         .foregroundColor(.orange)
                         .opacity(0.4)
@@ -56,7 +56,7 @@ struct PetCardView: View {
             }
         }
         .redacted(reason: petData.isRedacted ? .placeholder : .init())
-    }    
+    }
 }
 
 struct PetCellView_Previews: PreviewProvider {

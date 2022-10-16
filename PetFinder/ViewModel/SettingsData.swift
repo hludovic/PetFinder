@@ -24,12 +24,9 @@ class SettingsData {
 
     // It not defines the user -> In the Settings
     var canRecivePhoto: Bool {
-        get {
-            return true
-        }
+        return true
     }
 
-        
     /// Returns whether the pseudonym passed in parameter already exists.
     /// - Parameter pseudonym: The pseudonym to be tested.
     /// - Returns: Return true if the pseudp exists, or false if it does not exist.
@@ -40,14 +37,11 @@ class SettingsData {
     /// This method edits the application user's pseudonym.
     /// - Parameter pseudonym: the pseudonym that must be changed.
     static func updatePseudonym(pseudonym: String) async throws {
-        
     }
-    
+
     var isBanned: Bool {
         get async throws {
             return false
         }
     }
-
-    
 }

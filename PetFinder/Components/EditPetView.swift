@@ -12,35 +12,38 @@ struct EditPetView: View {
     @State var name: String = ""
     @State var date: Date = Date()
     @State var dailyReminderEnabled: Bool = true
-    @State var gender: Pet.Gender = .female
-    @State var petType: Pet.PetType = .dog
+    @State var gender: PetLost.Gender = .female
+    @State var petType: PetLost.PetType = .dog
     @State var race: String = ""
-    
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-    
+
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275),
+        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+    )
+
     var body: some View {
         List {
             Section {
                 Picker("Type", selection: $petType) {
-                    Text("Dog").tag(Pet.PetType.dog)
-                    Text("Cat").tag(Pet.PetType.cat)
+                    Text("Dog").tag(PetLost.PetType.dog)
+                    Text("Cat").tag(PetLost.PetType.cat)
                 }
                 .pickerStyle(.segmented)
                 TextField("Name", text: $name)
                 TextField("Race", text: $race)
                 DatePicker("Birthday", selection: $date, displayedComponents: .date)
                 Picker("Gender", selection: $gender) {
-                    Text("Male").tag(Pet.Gender.male)
-                    Text("Female").tag(Pet.Gender.female)
+                    Text("Male").tag(PetLost.Gender.male)
+                    Text("Female").tag(PetLost.Gender.female)
                 }
                 Map(coordinateRegion: $region)
                     .frame(maxWidth: .infinity)
                     .aspectRatio(1, contentMode: .fill)
                     .disabled(true)
             } header: {
-                HStack{
+                HStack {
                     Spacer()
-                    VStack{
+                    VStack {
                         TopPhotoEditView(photo: .constant("Pet3"))
                         Text("Owner: Ownername")
                             .lineLimit(1)
@@ -67,14 +70,14 @@ struct EditPetView_Previews: PreviewProvider {
 
 struct TopPhotoEditView: View {
     @Binding var photo: String
-    
+
     var body: some View {
         Image(photo)
             .resizable()
             .scaledToFit()
             .clipShape(Circle())
             .frame(width: 200, height: 200)
-            .overlay{
+            .overlay {
                 Button {
                     print("Action")
                 } label: {

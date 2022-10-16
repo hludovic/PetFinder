@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AroundMeView: View {
     @EnvironmentObject var viewModel: AroundMeData
-    
+
     var body: some View {
         switch viewModel.authorizationStatus {
         case .notDetermined:
@@ -31,7 +31,7 @@ struct AroundMeView_Previews: PreviewProvider {
         let previewData = AroundMeData()
         AroundMeView()
             .environmentObject(previewData)
-            .onAppear{
+            .onAppear {
                 previewData.authorizationStatus = .authorizedAlways
                 previewData.location = PreviewMockedData.myLocation
                 Task { await previewData.loadData() }
