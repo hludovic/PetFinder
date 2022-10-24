@@ -73,7 +73,7 @@ extension AroundMeData {
         let query = CKQuery(recordType: "Pets", predicate: predicate)
         let (values, _) = try await Model.database.records(
             matching: query,
-            desiredKeys: ["user", "name", "gender", "type", "race", "birthDay", "location", "dateLost"]
+            desiredKeys: ["user", "name", "gender", "type", "breed", "birthDay", "location", "dateLost"]
         )
         for value in values {
             if let record = try? value.1.get() {
@@ -82,7 +82,7 @@ extension AroundMeData {
                     let name = record["name"] as? String,
                     let gender = record["gender"] as? String,
                     let type = record["type"] as? String,
-                    let race = record["race"] as? String,
+                    let breed = record["breed"] as? String,
                     let dateLost = record["dateLost"] as? Date,
                     let birthDay = record["birthDay"] as? Date,
                     let location = record["location"] as? CLLocation
@@ -93,7 +93,7 @@ extension AroundMeData {
                     name: name,
                     gender: gender,
                     type: type,
-                    race: race,
+                    breed: breed,
                     dateLost: dateLost,
                     birthDay: birthDay,
                     location: location

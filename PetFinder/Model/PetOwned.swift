@@ -12,6 +12,6 @@ struct PetOwned: Identifiable {
     let name: String
     let gender: String
     let type: String
-    let race: String
+    let breed: String
     let birthDay: Date
 }

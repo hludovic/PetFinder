@@ -31,7 +31,7 @@ struct PreviewMockedData {
             "location": CLLocation(latitude: 16.261587307523747, longitude: -61.62137873321357),
             "name": "Felix",
             "photo": CKAsset(fileURL: localeURL(forImageNamed: "Pet1")!),
-            "race": PetLost.DogRace.englishSpringerSpaniel.name,
+            "breed": PetLost.DogBreed.englishSpringerSpaniel.name,
             "type": PetLost.PetType.cat.rawValue,
             "user": CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
         ])
@@ -43,7 +43,7 @@ struct PreviewMockedData {
             "location": CLLocation(latitude: 16.04076861022844, longitude: -61.60101545693777),
             "name": "Martin",
             "photo": CKAsset(fileURL: localeURL(forImageNamed: "Pet2")!),
-            "race": PetLost.DogRace.borderCollie.name,
+            "breed": PetLost.DogBreed.borderCollie.name,
             "type": PetLost.PetType.dog.rawValue,
             "user": CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
         ])
@@ -55,7 +55,7 @@ struct PreviewMockedData {
             "location": CLLocation(latitude: 16.258563662672728, longitude: -61.272922369971425),
             "name": "Woofy",
             "photo": CKAsset(fileURL: localeURL(forImageNamed: "Pet3")!),
-            "race": PetLost.DogRace.germanShorthairedPointer.name,
+            "breed": PetLost.DogBreed.germanShorthairedPointer.name,
             "type": PetLost.PetType.dog.rawValue,
             "user": CKRecord.Reference(recordID: CKRecord.ID(recordName: "_6ca1cd867330130aadfa04d47746aff9"), action: .none)
         ])
@@ -83,7 +83,7 @@ struct PreviewMockedData {
                     name: "Felix",
                     gender: PetLost.Gender.male.rawValue,
                     type: PetLost.PetType.cat.rawValue,
-                    race: PetLost.DogRace.englishSpringerSpaniel.name,
+                    breed: PetLost.DogBreed.englishSpringerSpaniel.name,
                     dateLost: dateCreator(year: 2022, month: 3, day: 9),
                     birthDay: dateCreator(year: 2020, month: 1, day: 4),
                     location: CLLocation(latitude: 16.261587307523747, longitude: -61.62137873321357)
@@ -93,7 +93,7 @@ struct PreviewMockedData {
                     name: "Martin",
                     gender: PetLost.Gender.female.rawValue,
                     type: PetLost.PetType.dog.rawValue,
-                    race: PetLost.DogRace.borderCollie.name,
+                    breed: PetLost.DogBreed.borderCollie.name,
                     dateLost: dateCreator(year: 2022, month: 2, day: 10),
                     birthDay: dateCreator(year: 2021, month: 7, day: 12),
                     location: CLLocation(latitude: 16.04076861022844, longitude: -61.60101545693777)
@@ -103,7 +103,7 @@ struct PreviewMockedData {
                     name: "Woofy",
                     gender: PetLost.Gender.male.rawValue,
                     type: PetLost.PetType.dog.rawValue,
-                    race: PetLost.DogRace.germanShorthairedPointer.name,
+                    breed: PetLost.DogBreed.germanShorthairedPointer.name,
                     dateLost: dateCreator(year: 2022, month: 1, day: 4),
                     birthDay: dateCreator(year: 2022, month: 5, day: 23),
                     location: CLLocation(latitude: 16.258563662672728, longitude: -61.272922369971425)
@@ -120,7 +120,7 @@ struct PreviewMockedData {
         let predicate = NSPredicate(format: "___createdBy == %@", CKRecord.Reference(recordID: myId, action: .none))
         let query = CKQuery(recordType: "Pets", predicate: predicate)
         let (values, _) = try await privateDB.records(
-            matching: query, desiredKeys: ["user", "name", "gender", "type", "race", "birthDay", "location"],
+            matching: query, desiredKeys: ["user", "name", "gender", "type", "breed", "birthDay", "location"],
             resultsLimit: 100
         )
 
@@ -131,7 +131,7 @@ struct PreviewMockedData {
                     let name = record["name"] as? String,
                     let gender = record["gender"] as? String,
                     let type = record["type"] as? String,
-                    let race = record["race"] as? String,
+                    let breed = record["breed"] as? String,
                     let dateLost = record["dateLost"] as? Date,
                     let birthDay = record["birthDay"] as? Date,
                     let location = record["location"] as? CLLocation
@@ -143,7 +143,7 @@ struct PreviewMockedData {
                     name: name,
                     gender: gender,
                     type: type,
-                    race: race,
+                    breed: breed,
                     dateLost: dateLost,
                     birthDay: birthDay,
                     location: location

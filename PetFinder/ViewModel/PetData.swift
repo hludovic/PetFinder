@@ -36,14 +36,10 @@ class PetData: ObservableObject {
 
 extension PetData {
     @MainActor private func loadDateLostString() {
-        guard let date = pet.dateLost  else {
-            Self.logger.warning("Fail loading a pet data: his dateLost value is nil")
-            return displayError(message: "Unable to load the pet data")
-        }
         let dateFormater = DateFormatter()
         dateFormater.dateStyle = .full
         dateFormater.timeStyle = .short
-        dateLost = "Lost the \(dateFormater.string(from: date))"
+        dateLost = "Lost the \(dateFormater.string(from: pet.dateLost))"
     }
 
     private func loadphotoURL() async {

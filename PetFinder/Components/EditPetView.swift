@@ -14,7 +14,7 @@ struct EditPetView: View {
     @State var dailyReminderEnabled: Bool = true
     @State var gender: PetLost.Gender = .female
     @State var petType: PetLost.PetType = .dog
-    @State var race: String = ""
+    @State var breed: String = ""
 
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275),
@@ -30,7 +30,7 @@ struct EditPetView: View {
                 }
                 .pickerStyle(.segmented)
                 TextField("Name", text: $name)
-                TextField("Race", text: $race)
+                TextField("Breed", text: $breed)
                 DatePicker("Birthday", selection: $date, displayedComponents: .date)
                 Picker("Gender", selection: $gender) {
                     Text("Male").tag(PetLost.Gender.male)

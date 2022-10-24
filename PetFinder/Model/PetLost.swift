@@ -14,9 +14,8 @@ struct PetLost: Identifiable {
     let name: String
     let gender: String
     let type: String
-    let race: String
-    // TODO: Remove Date to Optional
-    let dateLost: Date?
+    let breed: String
+    let dateLost: Date
     let birthDay: Date
     let location: CLLocation
 }
@@ -37,9 +36,9 @@ extension PetLost {
     }
 }
 
-// - MARK: Enum the Dogs race
+// - MARK: Enum popular dog breeds
 extension PetLost {
-    enum DogRace: Int, CaseIterable, Identifiable {
+    enum DogBreed: Int, CaseIterable, Identifiable {
         case labrador, frenchBulldog, goldenRetrievers, sermanShepherd,
              poodle, bulldog, beagle, rottweiler, germanShorthairedPointer,
              dachshund, pembrokeWelshCorgi, australianShepherd, yorkshireTerriers,
