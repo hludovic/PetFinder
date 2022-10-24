@@ -8,9 +8,8 @@
 import Foundation
 import CoreData
 
-class MyPetsData {
+class MyPetsData: ObservableObject {
     let container: NSPersistentContainer
-
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "MyPetModel")
         if inMemory {
@@ -19,5 +18,16 @@ class MyPetsData {
         container.loadPersistentStores {_, error in
             if let error { print(error.localizedDescription) }
         }
+    }
+
+    func savePet(pet: PetOwned) {
+        let myPet = MyPet(context: container.viewContext)
+        myPet.birthDay = pet.birthDay
+        myPet.breed = pet.breed
+        myPet.gender =  pet.gender
+        myPet.id = pet.id
+        myPet.name = pet.name
+        myPet.type = pet.type
+        try? container.viewContext.save()
     }
 }

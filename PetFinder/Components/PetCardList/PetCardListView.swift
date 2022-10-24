@@ -13,6 +13,7 @@ struct PetCardListView: View {
     var body: some View {
         NavigationView {
             List {
+                // TODO: If petsAround is empty -> Display No pets around View
                 ForEach(aroundMeData.petsAround) { pet in
                     PetCardView(petData: PetData(pet: pet))
                 }
