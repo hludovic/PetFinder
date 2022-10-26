@@ -60,7 +60,6 @@ struct SettingsView: View {
                     .presentationDetents([.medium])
             }
             .navigationTitle("Settings")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 

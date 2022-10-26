@@ -39,6 +39,14 @@ struct MyPetsView: View {
                         Label("Add", systemImage: "plus")
                     }
                 }
+
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NavigationLink {
+                        EditPetView()
+                    } label: {
+                        Label("Add", systemImage: "photo")
+                    }
+                }
             }
             .navigationTitle("My Pets")
         }
