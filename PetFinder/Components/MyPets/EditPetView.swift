@@ -27,7 +27,7 @@ struct EditPetView: View {
                 .pickerStyle(.automatic)
                 TextField("Name", text: $name)
                 TextField("Breed", text: $breed)
-                // TODO: Fix Errors on DatePicker
+                // DatePicker Constraint errors; iOS 16 Bugs
                 DatePicker("Birthday", selection: $date, displayedComponents: .date)
                 Picker("Gender", selection: $gender) {
                     Text("Male").tag(PetLost.Gender.male)
@@ -57,6 +57,7 @@ struct EditPetView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             EditPetView()
+                .environment(\.locale, Locale.init(identifier: "fr"))
         }
     }
 }

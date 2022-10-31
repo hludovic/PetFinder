@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		430FE47129108A9700144F20 /* NoPetsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430FE47029108A9700144F20 /* NoPetsCardView.swift */; };
 		4329314528DBD39F003FA4EF /* AroundMeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4329314428DBD39F003FA4EF /* AroundMeData.swift */; };
 		4329314728DBD403003FA4EF /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4329314628DBD403003FA4EF /* SettingsData.swift */; };
 		4329314928DBD468003FA4EF /* MyPetsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4329314828DBD468003FA4EF /* MyPetsData.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		430FE47029108A9700144F20 /* NoPetsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPetsCardView.swift; sourceTree = "<group>"; };
 		4329314428DBD39F003FA4EF /* AroundMeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundMeData.swift; sourceTree = "<group>"; };
 		4329314628DBD403003FA4EF /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		4329314828DBD468003FA4EF /* MyPetsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPetsData.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				43C61AA128DAB5D0001D3E51 /* AroundMeView.swift */,
 				43AD5A0028EA7C9B006A856A /* CLAuthorizationView.swift */,
 				43AD5A0228EA7DFD006A856A /* CLErrorView.swift */,
+				430FE47029108A9700144F20 /* NoPetsCardView.swift */,
 				43D352DF28DABC3A0036E80F /* PetCardView.swift */,
 				43D352E828DB78370036E80F /* PetCardListView.swift */,
 			);
@@ -360,6 +363,7 @@
 				43DF93A928ED3688001C8858 /* EditPseudoView.swift in Sources */,
 				4350361728D8062D00BDE92E /* WelcomeView.swift in Sources */,
 				43D352E028DABC3A0036E80F /* PetCardView.swift in Sources */,
+				430FE47129108A9700144F20 /* NoPetsCardView.swift in Sources */,
 				435509DC28E3A0DC007FB344 /* CloudStatusView.swift in Sources */,
 				439BF6EA28F60E0700317ACF /* MyPetModel.xcdatamodeld in Sources */,
 				43C61AA428DAB5F3001D3E51 /* MyPetsView.swift in Sources */,

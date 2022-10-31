@@ -13,7 +13,7 @@ struct MyPetsView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
+            Group {
                 if myPets.count == 0 {
                     Text("Press + to add a new pet")
                 } else {
