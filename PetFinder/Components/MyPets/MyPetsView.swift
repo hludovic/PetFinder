@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct MyPetsView: View {
-    @FetchRequest(sortDescriptors: []) var myPets: FetchedResults<MyPet>
+    @FetchRequest(sortDescriptors: []) private var myPets: FetchedResults<MyPet>
+    @State var presentNewPetSheet: Bool = false
     @EnvironmentObject var myPetsData: MyPetsData
+    @Environment(\.managedObjectContext) var context
 
     var body: some View {
         NavigationView {
@@ -18,38 +20,46 @@ struct MyPetsView: View {
                     Text("Press + to add a new pet")
                 } else {
                     List(myPets) { myPet in
-                        Text(myPet.name ?? "Error")
+                        PetCellView(pet: myPet)
+                            .swipeActions(edge: .leading) {
+                                DeleteMyPetView(pet: myPet)
+                            }
+                            .listRowSeparator(.hidden)
                     }
+                    .listStyle(.inset)
                 }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        let pet = PetOwned(
-                            id: UUID(),
-                            name: "Woofy",
-                            gender: "Male",
-                            type: "Dog",
-                            breed: "Doberman",
-                            birthDay: Date()
-                        )
-                        myPetsData.savePet(pet: pet)
-
+                        let pett = MyPet(context: context)
+                        pett.id = UUID()
+                        pett.name = "Woofy"
+                        pett.gender = "Male"
+                        pett.type = "Dog"
+                        pett.breed = "Doberman"
+                        pett.birthDay = Date()
+                        myPetsData.savePet(pet: pett)
                     } label: {
                         Label("Add", systemImage: "plus")
                     }
                 }
 
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink {
-                        EditPetView()
+                    Button {
+                        presentNewPetSheet.toggle()
                     } label: {
                         Label("Add", systemImage: "photo")
+
                     }
                 }
             }
             .navigationTitle("My Pets")
         }
+        .sheet(isPresented: $presentNewPetSheet) {
+            EditPetView()
+        }
+
     }
 }
 

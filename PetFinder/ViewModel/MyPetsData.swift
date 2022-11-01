@@ -20,14 +20,23 @@ class MyPetsData: ObservableObject {
         }
     }
 
-    func savePet(pet: PetOwned) {
-        let myPet = MyPet(context: container.viewContext)
-        myPet.birthDay = pet.birthDay
-        myPet.breed = pet.breed
-        myPet.gender =  pet.gender
-        myPet.id = pet.id
-        myPet.name = pet.name
-        myPet.type = pet.type
+    func deletePet(pet: MyPet) {
+        container.viewContext.delete(pet)
+        try? container.viewContext.save()
+    }
+
+    func savePet(pet: MyPet) {
+        guard
+            pet.id != nil,
+            pet.name != nil,
+            pet.breed != nil,
+            pet.birthDay != nil,
+            pet.type != nil,
+            pet.gender != nil
+        else {
+            print("error")
+            return
+        }
         try? container.viewContext.save()
     }
 }

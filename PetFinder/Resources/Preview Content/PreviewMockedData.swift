@@ -9,8 +9,41 @@ import Foundation
 import CloudKit
 import SwiftUI
 import CoreLocation
+import CoreData
 
 struct PreviewMockedData {
+
+
+    private static var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "MyPetModel")
+        container.persistentStoreDescriptions.first?.url = URL(filePath: "/dev/null")
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                fatalError("Unable to load persistent stores: \(error)")
+            }
+        }
+        return container
+    }()
+
+     static var context: NSManagedObjectContext {
+         return Self.persistentContainer.viewContext
+     }
+
+
+
+
+    static func fakeMyPet() -> MyPet {
+        print("🖐 Start newPet")
+        let pet = MyPet(context: context)
+        pet.breed = "Cavalier King Charles Spaniel"
+        pet.name = "Felix"
+        pet.birthDay = Date()
+        pet.gender = "Male"
+        pet.id = UUID()
+        pet.type = "Dog"
+        return pet
+    }
+
     static var myLocation: CLLocationCoordinate2D {
         let location = CLLocation(latitude: 16.255072, longitude: -61.653711)
         return location.coordinate

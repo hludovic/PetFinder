@@ -10,6 +10,7 @@ import UIKit
 import PhotosUI
 
 struct EditPetView: View {
+    @Environment(\.dismiss) var dismiss
     @State var name: String = ""
     @State var date: Date = Date()
     @State var dailyReminderEnabled: Bool = true
@@ -18,38 +19,57 @@ struct EditPetView: View {
     @State var breed: String = ""
 
     var body: some View {
-        List {
-            Section {
-                Picker("Type", selection: $petType) {
-                    Text("Dog").tag(PetLost.PetType.dog)
-                    Text("Cat").tag(PetLost.PetType.cat)
-                }
-                .pickerStyle(.automatic)
-                TextField("Name", text: $name)
-                TextField("Breed", text: $breed)
-                // DatePicker Constraint errors; iOS 16 Bugs
-                DatePicker("Birthday", selection: $date, displayedComponents: .date)
-                Picker("Gender", selection: $gender) {
-                    Text("Male").tag(PetLost.Gender.male)
-                    Text("Female").tag(PetLost.Gender.female)
-                }
-            } header: {
-                HStack {
-                    Spacer()
-                    VStack {
-                        TopPhotoEditView()
-                        Text("Owner: Ownername")
-                            .lineLimit(1)
-                            .padding(.bottom, 10)
+        NavigationView {
+            List {
+                Section {
+                    Picker("Type", selection: $petType) {
+                        Text("Dog").tag(PetLost.PetType.dog)
+                        Text("Cat").tag(PetLost.PetType.cat)
                     }
-                    Spacer()
+                    .pickerStyle(.segmented)
+                    TextField("Name", text: $name)
+                    TextField("Breed", text: $breed)
+                    // DatePicker Constraint errors; iOS 16 Bugs
+                    DatePicker("Birthday", selection: $date, displayedComponents: .date)
+                    Picker("Gender", selection: $gender) {
+                        Text("Male").tag(PetLost.Gender.male)
+                        Text("Female").tag(PetLost.Gender.female)
+                    }
+                } header: {
+                    HStack {
+                        Spacer()
+                        VStack {
+                            TopPhotoEditView()
+                            Text("Image size: 123Kb")
+                                .lineLimit(1)
+                                .padding(.bottom, 10)
+                        }
+                        Spacer()
+                    }
+                } footer: {
+                    Text("Footer text")
                 }
-            } footer: {
-                Text("Footer text")
+            }
+            .navigationTitle("About my pet")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        print("Gogo")
+                    } label: {
+                        Text("Save")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Cancel")
+                    }
+
+                }
             }
         }
-        .navigationTitle("New Pet")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

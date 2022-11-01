@@ -45,10 +45,6 @@ struct PetCardView: View {
         }
         .background(Color("CellBackgroundColor"))
         .cornerRadius(10)
-//        .overlay(
-//            RoundedRectangle(cornerRadius: 10)
-//                .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255, opacity: 0.1), lineWidth: 1)
-//        )
         .shadow(radius: 5)
         .onAppear {
             Task {
@@ -59,7 +55,7 @@ struct PetCardView: View {
     }
 }
 
-struct PetCellView_Previews: PreviewProvider {
+struct PetCardView_Previews: PreviewProvider {
     static var previews: some View {
         let pets = PreviewMockedData.getFakePets()
         PetCardView(petData: PetData(pet: pets.first!))
