@@ -32,14 +32,14 @@ struct MyPetsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        let pett = MyPet(context: context)
-                        pett.id = UUID()
-                        pett.name = "Woofy"
-                        pett.gender = "Male"
-                        pett.type = "Dog"
-                        pett.breed = "Doberman"
-                        pett.birthDay = Date()
-                        myPetsData.savePet(pet: pett)
+                        let pet = MyPet(context: context)
+                        pet.id = UUID()
+                        pet.name = "Woofy"
+                        pet.gender = "Male"
+                        pet.type = "Dog"
+                        pet.breed = "Doberman"
+                        pet.birthDay = Date()
+                        myPetsData.savePet(pet: pet)
                     } label: {
                         Label("Add", systemImage: "plus")
                     }

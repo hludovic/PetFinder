@@ -11,7 +11,7 @@ import CoreData
 class MyPetsData: ObservableObject {
     let container: NSPersistentContainer
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "MyPetModel")
+        container = NSPersistentContainer(name: "PetFinder")
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(filePath: "/dev/null")
         }

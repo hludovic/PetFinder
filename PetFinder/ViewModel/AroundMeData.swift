@@ -141,7 +141,6 @@ extension AroundMeData: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
         guard let newLocation = locations.first else {
-            // TODO: Logg this error
             return print("Error")
         }
         logger.info("Updating Location")
