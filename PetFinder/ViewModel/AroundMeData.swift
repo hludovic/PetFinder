@@ -12,12 +12,12 @@ import os
 class AroundMeData: NSObject, ObservableObject {
     @Published private(set) var petsAround: [PetLost] = []
     @Published var range: Radius = .r50km { didSet { Task { await loadData() } } }
-    @Published var alert: Bool = false
+    @Published var isDesplayingAlert: Bool = false
     @Published private(set) var alertMessage: String?
     @Published var authorizationStatus: CLAuthorizationStatus
     private let locationManager: CLLocationManager
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: AroundMeData.self))
     var location: CLLocationCoordinate2D = CLLocationCoordinate2D()
-    private static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: AroundMeData.self))
 
     override init() {
         self.locationManager = CLLocationManager()
@@ -28,14 +28,14 @@ class AroundMeData: NSObject, ObservableObject {
 
     func startUpdatingMyLocation() {
         if authorizationStatus == .authorizedWhenInUse {
-            Self.logger.trace("Start requesting locations")
+            logger.info("Starting location request")
             locationManager.delegate = self
             locationManager.requestLocation()
         }
     }
 
     func loadData() async {
-        Self.logger.trace("Start Loading the Data")
+        logger.info("Starting loading data")
         let locationToFetch = CLLocation(latitude: location.latitude, longitude: location.longitude)
         let pets: [PetLost]
         do {
@@ -44,13 +44,13 @@ class AroundMeData: NSObject, ObservableObject {
             return await displayError(message: error.localizedDescription)
         }
         await MainActor.run {
-            Self.logger.notice("Load data Finished")
+            logger.info("Finished loading data")
             petsAround = pets
         }
     }
 
-    func requestAuthorization() {
-        Self.logger.trace("Start requesting \"When in use\" authorization")
+    func requestLocationAuthorization() {
+        logger.info("Starting location authorisation request")
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
@@ -60,11 +60,11 @@ class AroundMeData: NSObject, ObservableObject {
     }
 }
 
-// MARK: - Private methods
+// MARK: - CloudKit methods
 extension AroundMeData {
     @MainActor private func displayError(message: String) {
         alertMessage = message
-        alert = true
+        isDesplayingAlert = true
     }
 
     private func fetchMissingPetsAround(location: CLLocation, radiusInMeters: Radius) async throws -> [PetLost] {
@@ -133,17 +133,18 @@ extension AroundMeData {
 // MARK: - Core Location Manager Delegate
 extension AroundMeData: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        Self.logger.warning("\(error.localizedDescription)")
+        logger.error("\(error.localizedDescription) - locationManager(_, locations)")
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        Self.logger.trace("Stop requesting locations")
+        logger.info("Finished location request")
         locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
         guard let newLocation = locations.first else {
+            // TODO: Logg this error
             return print("Error")
         }
-        Self.logger.trace("Update location")
+        logger.info("Updating Location")
         location = newLocation.coordinate
         Task { await loadData() }
     }

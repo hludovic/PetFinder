@@ -11,15 +11,18 @@ struct CLErrorView: View {
     var errorText: String
 
     var body: some View {
-        VStack {
-            Image(systemName: "xmark.octagon")
-                    .resizable()
-                .frame(width: 100, height: 100, alignment: .center)
-            Text(errorText)
+        NavigationView {
+            VStack {
+                Image(systemName: "xmark.octagon")
+                        .resizable()
+                    .frame(width: 100, height: 100, alignment: .center)
+                Text(errorText)
+            }
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.red)
+            .navigationTitle("Around Me")
         }
-        .padding()
-        .foregroundColor(.white)
-        .background(Color.red)
     }
 }
 

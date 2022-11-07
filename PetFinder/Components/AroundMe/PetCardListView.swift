@@ -12,14 +12,17 @@ struct PetCardListView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                if aroundMeData.petsAround.count == 0 {
-                    NoPetsCardView()
+            Group {
+                if aroundMeData.petsAround.isEmpty {
+                    EmptyCardsView()
+                        .listStyle(.inset)
                 } else {
-                    ForEach(aroundMeData.petsAround) { pet in
-                        PetCardView(petData: PetData(pet: pet))
+                    List {
+                        ForEach(aroundMeData.petsAround) { pet in
+                            PetCardView(petData: PetData(pet: pet))
+                        }
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowSeparator(.hidden)
                 }
             }
             .listStyle(.inset)
@@ -34,14 +37,12 @@ struct PetCardListView: View {
                     Label("Radius", systemImage: "mappin.and.ellipse")
                 }
             }
-            .alert(aroundMeData.alertMessage ?? "Error", isPresented: $aroundMeData.alert) {
+            .alert(aroundMeData.alertMessage ?? "Error", isPresented: $aroundMeData.isDesplayingAlert) {
                 Button("OK") {
                     aroundMeData.resetAlertMessage()
                 }
             }
-        }
-        .refreshable {
-            await aroundMeData.loadData()
+            .refreshable { await aroundMeData.loadData() }
         }
     }
 }

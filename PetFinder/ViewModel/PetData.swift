@@ -10,13 +10,14 @@ import CloudKit
 import os
 
 class PetData: ObservableObject {
+    private let taskID = UUID()
     @Published var isRedacted: Bool = true
     @Published var alert: Bool = false
     @Published private(set) var petName: String = "petName"
     @Published private(set) var dateLost: String
     @Published private(set) var imageURL: URL?
     @Published private(set) var alertMessage: String?
-    public static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: PetData.self))
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: PetData.self))
     private var pet: PetLost
 
     init(pet: PetLost) {
@@ -43,23 +44,24 @@ extension PetData {
     }
 
     private func loadphotoURL() async {
-        Self.logger.trace("Start fetching a pet Photo")
+        logger.info("Started loadphotoURL - Task \(self.taskID)")
         let records: [CKRecord.ID: Result<CKRecord, Error>]
         do {
             records = try await Model.database.records(for: [CKRecord.ID(recordName: pet.id)], desiredKeys: ["photo"])
         } catch let error {
-            return Self.logger.warning("\(error.localizedDescription)")
+            return logger.error("\(error.localizedDescription) - Task \(self.taskID)")
         }
         guard let (_, result) = records.first else {
-            Self.logger.warning("Fetching photo error. The pet don't have photo")
+            logger.error("Error loadphotoURL. The pet don't have photo - Task \(self.taskID)")
             return await displayError(message: "Unable to load the pet data")
         }
         if let data = try? result.get() {
             guard let photo = data["photo"] as? CKAsset else {
+                logger.error("Error loadphotoURL - Task \(self.taskID)")
                 return await displayError(message: "Unable to load the pet data")
             }
             await MainActor.run {
-                Self.logger.trace("End fetching a pet Photo")
+                logger.info("Finished loadphotoURL - Task \(self.taskID)")
                 imageURL = photo.fileURL
             }
         }

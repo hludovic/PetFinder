@@ -11,19 +11,22 @@ struct CLAuthorizationView: View {
     @EnvironmentObject var aroundMeData: AroundMeData
 
     var body: some View {
-        VStack {
-            Button(action: {
-                aroundMeData.requestAuthorization()
-            }, label: {
-                Label("Allow tracking", systemImage: "location")
-            })
-            .padding(10)
-            .foregroundColor(.white)
-            .background(Color.blue)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-            Text("We need your permission to track your location.")
-                .foregroundColor(.gray)
-                .font(.caption)
+        NavigationView {
+            VStack {
+                Button(action: {
+                    aroundMeData.requestLocationAuthorization()
+                }, label: {
+                    Label("Allow tracking", systemImage: "location")
+                })
+                .padding(10)
+                .foregroundColor(.white)
+                .background(Color.blue)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                Text("We need your permission to track your location.")
+                    .foregroundColor(.gray)
+                    .font(.caption)
+            }
+            .navigationTitle("Around Me")
         }
     }
 }
