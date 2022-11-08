@@ -41,7 +41,11 @@ class AroundMeData: NSObject, ObservableObject {
         do {
             pets = try await fetchMissingPetsAround(location: locationToFetch, radiusInMeters: range)
         } catch let error {
-            return await displayError(message: error.localizedDescription)
+            logger.error("\(error.localizedDescription) - AroundMeData/loadData()")
+             return await MainActor.run {
+                alertMessage = "Failed to Load data.\n Check your network connection status."
+                isDesplayingAlert = true
+            }
         }
         await MainActor.run {
             logger.info("Finished loading data")
@@ -62,11 +66,6 @@ class AroundMeData: NSObject, ObservableObject {
 
 // MARK: - CloudKit methods
 extension AroundMeData {
-    @MainActor private func displayError(message: String) {
-        alertMessage = message
-        isDesplayingAlert = true
-    }
-
     private func fetchMissingPetsAround(location: CLLocation, radiusInMeters: Radius) async throws -> [PetLost] {
         var pets: [PetLost] = []
         let predicate = NSPredicate(format: "distanceToLocation:fromLocation:(location, %@) < %f", location, radiusInMeters.value)
@@ -133,7 +132,9 @@ extension AroundMeData {
 // MARK: - Core Location Manager Delegate
 extension AroundMeData: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        logger.error("\(error.localizedDescription) - locationManager(_, locations)")
+        logger.error("\(error.localizedDescription) - ArroundMeData/locationManager(didFailWithError)")
+        alertMessage = "Unable to fetch your current location."
+        isDesplayingAlert = true
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -141,7 +142,10 @@ extension AroundMeData: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
         guard let newLocation = locations.first else {
-            return print("Error")
+            logger.error("Unable to fetch the location - ArroundMeData/locationManager(didUpdateLocations)")
+            alertMessage = "Unable to fetch your current location.\n Check your app's location authorization status."
+            isDesplayingAlert = true
+            return
         }
         logger.info("Updating Location")
         location = newLocation.coordinate
