@@ -15,7 +15,7 @@ struct PreviewMockedData {
 
 
     private static var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "MyPetModel")
+        let container = NSPersistentContainer(name: "PetFinder")
         container.persistentStoreDescriptions.first?.url = URL(filePath: "/dev/null")
         container.loadPersistentStores { description, error in
             if let error = error {
