@@ -10,7 +10,6 @@ import SwiftUI
 struct MyPetsView: View {
     @FetchRequest(sortDescriptors: []) private var myPets: FetchedResults<MyPet>
     @State var presentNewPetSheet: Bool = false
-    @EnvironmentObject var myPetsData: MyPetsData
     @Environment(\.managedObjectContext) var context
 
     var body: some View {
@@ -32,25 +31,9 @@ struct MyPetsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        let pet = MyPet(context: context)
-                        pet.id = UUID()
-                        pet.name = "Woofy"
-                        pet.gender = "Male"
-                        pet.type = "Dog"
-                        pet.breed = "Doberman"
-                        pet.birthDay = Date()
-                        myPetsData.savePet(pet: pet)
-                    } label: {
-                        Label("Add", systemImage: "plus")
-                    }
-                }
-
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
                         presentNewPetSheet.toggle()
                     } label: {
-                        Label("Add", systemImage: "photo")
-
+                        Label("Add", systemImage: "plus")
                     }
                 }
             }
@@ -64,10 +47,9 @@ struct MyPetsView: View {
 }
 
 struct MyPetsView_Previews: PreviewProvider {
-    static var myPetsData = MyPetsData(inMemory: true)
+    static var model = Model(inMemory: true)
     static var previews: some View {
         MyPetsView()
-            .environment(\.managedObjectContext, myPetsData.container.viewContext)
-            .environmentObject(myPetsData)
+            .environment(\.managedObjectContext, model.localContainer.viewContext)
     }
 }

@@ -9,22 +9,27 @@ import SwiftUI
 
 struct DeleteMyPetView: View {
     var pet: MyPet
-    @EnvironmentObject var myPetsData: MyPetsData
+    @Environment(\.managedObjectContext) var context
 
     var body: some View {
         Button(role: .destructive) {
-            myPetsData.deletePet(pet: pet)
+            deletePet()
         } label: {
             Image(systemName: "trash")
         }
     }
+
+    func deletePet() {
+        context.delete(pet)
+        try? context.save()
+    }
 }
 
 struct DeleteMyPetView_Previews: PreviewProvider {
-    static var myPetsData = MyPetsData(inMemory: true)
+    static var model = Model(inMemory: true)
     static var pet = PreviewMockedData.fakeMyPet()
     static var previews: some View {
         DeleteMyPetView(pet: pet)
-            .environmentObject(myPetsData)
+            .environment(\.managedObjectContext, model.localContainer.viewContext)
     }
 }

@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct PetCardView: View {
-    @StateObject var petData: PetData
+    var pet: PetLost
+    @StateObject var petCardVM = PetCardVM()
 
     var body: some View {
         VStack {
-            AsyncImage(url: petData.imageURL) { image in
+            AsyncImage(url: petCardVM.imageURL) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -29,12 +30,12 @@ struct PetCardView: View {
             }
             HStack {
                 VStack(alignment: .leading) {
-                    Text(petData.petName)
+                    Text(petCardVM.petName)
                         .font(.title)
                         .fontWeight(.black)
                         .foregroundColor(.primary)
                         .lineLimit(3)
-                    Text(petData.dateLost)
+                    Text(petCardVM.dateLost)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -48,17 +49,17 @@ struct PetCardView: View {
         .shadow(radius: 5)
         .onAppear {
             Task {
-                await petData.loadData()
+                await petCardVM.loadData(pet: pet)
             }
         }
-        .redacted(reason: petData.isRedacted ? .placeholder : .init())
+        .redacted(reason: petCardVM.isRedacted ? .placeholder : .init())
     }
 }
 
 struct PetCardView_Previews: PreviewProvider {
+    static let pets = PreviewMockedData.getFakePets()
     static var previews: some View {
-        let pets = PreviewMockedData.getFakePets()
-        PetCardView(petData: PetData(pet: pets.first!))
+        PetCardView(pet: pets.first!)
             .previewLayout(.fixed(width: 500, height: 700))
             .previewDisplayName("New Pet Badge")
     }

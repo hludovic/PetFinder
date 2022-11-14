@@ -11,27 +11,22 @@ import PhotosUI
 
 struct EditPetView: View {
     @Environment(\.dismiss) var dismiss
-    @State var name: String = ""
-    @State var date: Date = Date()
-    @State var dailyReminderEnabled: Bool = true
-    @State var gender: PetLost.Gender = .female
-    @State var petType: PetLost.PetType = .dog
-    @State var breed: String = ""
+    @Environment(\.managedObjectContext) var context
+    @StateObject var editPetVM = EditPetVM()
 
     var body: some View {
         NavigationView {
             List {
                 Section {
-                    Picker("Type", selection: $petType) {
+                    Picker("Type", selection: $editPetVM.petType) {
                         Text("Dog").tag(PetLost.PetType.dog)
                         Text("Cat").tag(PetLost.PetType.cat)
                     }
                     .pickerStyle(.segmented)
-                    TextField("Name", text: $name)
-                    TextField("Breed", text: $breed)
-                    // DatePicker Constraint errors; iOS 16 Bugs
-                    DatePicker("Birthday", selection: $date, displayedComponents: .date)
-                    Picker("Gender", selection: $gender) {
+                    TextField("Name", text: $editPetVM.name)
+                    TextField("Breed", text: $editPetVM.breed)
+                    DatePicker("Birthday", selection: $editPetVM.date, displayedComponents: .date)
+                    Picker("Gender", selection: $editPetVM.gender) {
                         Text("Male").tag(PetLost.Gender.male)
                         Text("Female").tag(PetLost.Gender.female)
                     }
@@ -40,6 +35,7 @@ struct EditPetView: View {
                         Spacer()
                         VStack {
                             TopPhotoEditView()
+                                .environmentObject(editPetVM)
                             Text("Image size: 123Kb")
                                 .lineLimit(1)
                                 .padding(.bottom, 10)
@@ -55,10 +51,12 @@ struct EditPetView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        print("Gogo")
+                        editPetVM.savePet(context: context)
+                        dismiss()
                     } label: {
                         Text("Save")
                     }
+                    .disabled(!editPetVM.canSave)
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -73,20 +71,11 @@ struct EditPetView: View {
     }
 }
 
-struct EditPetView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            EditPetView()
-                .environment(\.locale, Locale.init(identifier: "fr"))
-        }
-    }
-}
-
 struct TopPhotoEditView: View {
-    @StateObject var imagePicker = ImagePicker()
+    @EnvironmentObject var editPetVM: EditPetVM
 
     var body: some View {
-        if let image = imagePicker.image {
+        if let image = editPetVM.image {
             image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -94,7 +83,7 @@ struct TopPhotoEditView: View {
                 .clipped()
                 .cornerRadius(25)
                 .overlay(alignment: .topTrailing) {
-                    PhotosPicker(selection: $imagePicker.imageSelection, matching: .images) {
+                    PhotosPicker(selection: $editPetVM.imageSelection, matching: .images) {
                         Image(systemName: "photo.circle")
                             .resizable()
                             .frame(width: 50, height: 50)
@@ -117,7 +106,7 @@ struct TopPhotoEditView: View {
                 }
                 .cornerRadius(25)
                 .overlay(alignment: .topTrailing) {
-                    PhotosPicker(selection: $imagePicker.imageSelection, matching: .images) {
+                    PhotosPicker(selection: $editPetVM.imageSelection, matching: .images) {
                         Image(systemName: "photo.circle")
                             .resizable()
                             .frame(width: 50, height: 50)
@@ -127,6 +116,14 @@ struct TopPhotoEditView: View {
                     }
                 }
         }
-
     }
+}
+
+struct EditPetView_Previews: PreviewProvider {
+    static var model = Model(inMemory: true)
+    static var previews: some View {
+            EditPetView()
+            .environment(\.managedObjectContext, model.localContainer.viewContext)
+            .environment(\.locale, Locale.init(identifier: "fr"))
+        }
 }

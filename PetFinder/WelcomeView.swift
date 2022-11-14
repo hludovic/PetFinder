@@ -9,14 +9,13 @@ import SwiftUI
 
 struct WelcomeView: View {
     @AppStorage("WelcomeViewCurrentTab") var selectedTab = 0
-    @EnvironmentObject var aroundMeData: AroundMeData
-    @EnvironmentObject var myPetsData: MyPetsData
+    @EnvironmentObject var aroundMeVM: AroundMeVM
 
     var body: some View {
         TabView(selection: $selectedTab) {
             AroundMeView()
                 .tabItem { Label("Around", systemImage: "location.magnifyingglass") }
-                .badge(aroundMeData.petsAround.count)
+                .badge(aroundMeVM.petsAround.count)
                 .tag(0)
             MyPetsView()
                 .tabItem { Label("My Pets", systemImage: "pawprint") }
@@ -29,13 +28,12 @@ struct WelcomeView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    static let previewData = AroundMeVM()
+    static let model = Model(inMemory: true)
     static var previews: some View {
-        let previewData = AroundMeData()
-        let myPetsData = MyPetsData(inMemory: true)
         WelcomeView()
-            .environment(\.managedObjectContext, myPetsData.container.viewContext)
+            .environment(\.managedObjectContext, model.localContainer.viewContext)
             .environmentObject(previewData)
-            .environmentObject(myPetsData)
             .onAppear {
                 previewData.authorizationStatus = .authorizedWhenInUse
                 previewData.location = PreviewMockedData.myLocation

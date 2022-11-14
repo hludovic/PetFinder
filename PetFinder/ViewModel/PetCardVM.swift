@@ -1,5 +1,5 @@
 //
-//  PetData.swift
+//  PetCardVM.swift
 //  PetFinder
 //
 //  Created by Ludovic HENRY on 26/09/2022.
@@ -9,23 +9,26 @@ import Foundation
 import CloudKit
 import os
 
-class PetData: ObservableObject {
+class PetCardVM: ObservableObject {
     private let taskID = UUID()
     @Published var isRedacted: Bool = true
     @Published var alert: Bool = false
-    @Published private(set) var petName: String = "petName"
+    @Published private(set) var petName: String
     @Published private(set) var dateLost: String
     @Published private(set) var imageURL: URL?
     @Published private(set) var alertMessage: String?
-    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: PetData.self))
-    private var pet: PetLost
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: PetCardVM.self))
+    @Published private(set) var pet: PetLost?
 
-    init(pet: PetLost) {
+    init() {
+        petName = "petName"
         dateLost = "Lost the wednesday, March 9 2002 at 12:00 AM"
-        self.pet = pet
     }
 
-    func loadData() async {
+    func loadData(pet: PetLost) async {
+        await MainActor.run {
+            self.pet = pet
+        }
         await loadphotoURL()
         await MainActor.run {
             petName = pet.name
@@ -35,8 +38,9 @@ class PetData: ObservableObject {
     }
 }
 
-extension PetData {
+extension PetCardVM {
     @MainActor private func loadDateLostString() {
+        guard let pet else { return }
         let dateFormater = DateFormatter()
         dateFormater.dateStyle = .full
         dateFormater.timeStyle = .short
@@ -44,10 +48,11 @@ extension PetData {
     }
 
     private func loadphotoURL() async {
+        guard let pet else { return }
         logger.info("Started loadphotoURL - Task \(self.taskID)")
         let records: [CKRecord.ID: Result<CKRecord, Error>]
         do {
-            records = try await Model.database.records(for: [CKRecord.ID(recordName: pet.id)], desiredKeys: ["photo"])
+            records = try await Model.CloudDatabase.records(for: [CKRecord.ID(recordName: pet.id)], desiredKeys: ["photo"])
         } catch let error {
             return logger.error("\(error.localizedDescription) - Task \(self.taskID)")
         }

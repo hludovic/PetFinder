@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CLAuthorizationView: View {
-    @EnvironmentObject var aroundMeData: AroundMeData
+    @EnvironmentObject var aroundMeData: AroundMeVM
 
     var body: some View {
         NavigationView {
@@ -32,7 +32,10 @@ struct CLAuthorizationView: View {
 }
 
 struct CLAuthorizationView_Previews: PreviewProvider {
+    static let previewData = AroundMeVM()
+
     static var previews: some View {
         CLAuthorizationView()
+            .environmentObject(previewData)
     }
 }

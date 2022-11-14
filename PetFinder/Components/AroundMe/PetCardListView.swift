@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct PetCardListView: View {
-    @EnvironmentObject var aroundMeData: AroundMeData
+    @EnvironmentObject var aroundMeVM: AroundMeVM
 
     var body: some View {
         NavigationView {
             Group {
-                if aroundMeData.petsAround.isEmpty {
+                if aroundMeVM.petsAround.isEmpty {
                     EmptyCardsView()
                         .listStyle(.inset)
                 } else {
                     List {
-                        ForEach(aroundMeData.petsAround) { pet in
-                            PetCardView(petData: PetData(pet: pet))
+                        ForEach(aroundMeVM.petsAround) { pet in
+                            PetCardView(pet: pet)
                         }
                         .listRowSeparator(.hidden)
                     }
@@ -28,8 +28,8 @@ struct PetCardListView: View {
             .listStyle(.inset)
             .navigationTitle("Around Me")
             .toolbar {
-                Picker(selection: $aroundMeData.range) {
-                    ForEach(AroundMeData.Radius.allCases) { radius in
+                Picker(selection: $aroundMeVM.range) {
+                    ForEach(AroundMeVM.Radius.allCases) { radius in
                         Label(radius.name, systemImage: "mappin.and.ellipse")
                             .tag(radius)
                     }
@@ -37,19 +37,19 @@ struct PetCardListView: View {
                     Label("Radius", systemImage: "mappin.and.ellipse")
                 }
             }
-            .alert(aroundMeData.alertMessage ?? "Error", isPresented: $aroundMeData.isDesplayingAlert) {
+            .alert(aroundMeVM.alertMessage ?? "Error", isPresented: $aroundMeVM.isDesplayingAlert) {
                 Button("OK") {
-                    aroundMeData.resetAlertMessage()
+                    aroundMeVM.resetAlertMessage()
                 }
             }
-            .refreshable { await aroundMeData.loadData() }
+            .refreshable { await aroundMeVM.loadData() }
         }
     }
 }
 
 struct PetListView_Previews: PreviewProvider {
     static var previews: some View {
-        let previewData = AroundMeData()
+        let previewData = AroundMeVM()
         PetCardListView()
             .environmentObject(previewData)
             .onAppear {

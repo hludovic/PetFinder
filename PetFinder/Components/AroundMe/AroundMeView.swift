@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AroundMeView: View {
-    @EnvironmentObject var viewModel: AroundMeData
+    @EnvironmentObject var viewModel: AroundMeVM
 
     var body: some View {
         switch viewModel.authorizationStatus {
@@ -28,7 +28,7 @@ struct AroundMeView: View {
 
 struct AroundMeView_Previews: PreviewProvider {
     static var previews: some View {
-        let previewData = AroundMeData()
+        let previewData = AroundMeVM()
         AroundMeView()
             .environmentObject(previewData)
             .onAppear {

@@ -1,5 +1,5 @@
 //
-//  AroundMeData.swift
+//  AroundMeVM.swift
 //  PetFinder
 //
 //  Created by Ludovic HENRY on 21/09/2022.
@@ -9,14 +9,14 @@ import CloudKit
 import CoreLocation
 import os
 
-class AroundMeData: NSObject, ObservableObject {
+class AroundMeVM: NSObject, ObservableObject {
     @Published private(set) var petsAround: [PetLost] = []
     @Published var range: Radius = .r50km { didSet { Task { await loadData() } } }
     @Published var isDesplayingAlert: Bool = false
     @Published private(set) var alertMessage: String?
     @Published var authorizationStatus: CLAuthorizationStatus
     private let locationManager: CLLocationManager
-    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: AroundMeData.self))
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: String(describing: AroundMeVM.self))
     var location: CLLocationCoordinate2D = CLLocationCoordinate2D()
 
     override init() {
@@ -65,12 +65,12 @@ class AroundMeData: NSObject, ObservableObject {
 }
 
 // MARK: - CloudKit methods
-extension AroundMeData {
+extension AroundMeVM {
     private func fetchMissingPetsAround(location: CLLocation, radiusInMeters: Radius) async throws -> [PetLost] {
         var pets: [PetLost] = []
         let predicate = NSPredicate(format: "distanceToLocation:fromLocation:(location, %@) < %f", location, radiusInMeters.value)
         let query = CKQuery(recordType: "Pets", predicate: predicate)
-        let (values, _) = try await Model.database.records(
+        let (values, _) = try await Model.CloudDatabase.records(
             matching: query,
             desiredKeys: ["user", "name", "gender", "type", "breed", "birthDay", "location", "dateLost"]
         )
@@ -105,7 +105,7 @@ extension AroundMeData {
 }
 
 // MARK: - The Radius
-extension AroundMeData {
+extension AroundMeVM {
     enum Radius: Int, CaseIterable, Identifiable {
         case r5km, r10km, r50km
 
@@ -130,7 +130,7 @@ extension AroundMeData {
 }
 
 // MARK: - Core Location Manager Delegate
-extension AroundMeData: CLLocationManagerDelegate {
+extension AroundMeVM: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         logger.error("\(error.localizedDescription) - ArroundMeData/locationManager(didFailWithError)")
         alertMessage = "Unable to fetch your current location."

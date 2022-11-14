@@ -7,19 +7,32 @@
 
 import Foundation
 import CloudKit
+import CoreData
 
-class Model {
-    static let container = CKContainer(identifier: "iCloud.fr.hludovic.container2")
-    static let database = container.publicCloudDatabase
+class Model: ObservableObject {
+    static let CloudContainer = CKContainer(identifier: "iCloud.fr.hludovic.container2")
+    static let CloudDatabase = CloudContainer.publicCloudDatabase
 
     static var CKUserRecordID: CKRecord.ID {
-        get async throws { try await container.userRecordID() }
+        get async throws { try await CloudContainer.userRecordID() }
+    }
+
+    var localContainer: NSPersistentContainer
+
+    init(inMemory: Bool = false) {
+        localContainer = NSPersistentContainer(name: "PetFinder")
+        if inMemory {
+            localContainer.persistentStoreDescriptions.first?.url = URL(filePath: "/dev/null")
+        }
+        localContainer.loadPersistentStores {_, error in
+            if let error { print(error.localizedDescription) }
+        }
     }
 
     static func CKAccountStatus() async -> (Bool, String) {
         let accountStatus: CKAccountStatus
         do {
-            accountStatus = try await container.accountStatus()
+            accountStatus = try await CloudContainer.accountStatus()
         } catch let error {
             print(error.localizedDescription)
             return (false, "")
