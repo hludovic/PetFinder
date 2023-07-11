@@ -7,13 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43AC4BB82A5DB6BD00FD0930 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC4BB72A5DB6BD00FD0930 /* User.swift */; };
+		43AC4BBA2A5DB76800FD0930 /* PetLost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC4BB92A5DB76800FD0930 /* PetLost.swift */; };
+		43AC4BBD2A5DBA7E00FD0930 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC4BBC2A5DBA7E00FD0930 /* Constants.swift */; };
+		43AC4BBF2A5DBACB00FD0930 /* Breed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC4BBE2A5DBACB00FD0930 /* Breed.swift */; };
+		43AC4BC12A5DBB3E00FD0930 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC4BC02A5DBB3E00FD0930 /* Errors.swift */; };
+		43AC4BC32A5DBB7F00FD0930 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC4BC22A5DBB7F00FD0930 /* NetworkManager.swift */; };
+		43AC4BCB2A5DC0A900FD0930 /* PetFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC4BCA2A5DC0A900FD0930 /* PetFinderTests.swift */; };
+		43AC4BD22A5DC4C900FD0930 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC4BD12A5DC4C900FD0930 /* PreviewData.swift */; };
+		43AC4BD42A5DC6F000FD0930 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC4BD32A5DC6F000FD0930 /* Date+Extension.swift */; };
 		43C9D4682A5C56AE000006A0 /* PetFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C9D4672A5C56AE000006A0 /* PetFinderApp.swift */; };
 		43C9D46A2A5C56AE000006A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C9D4692A5C56AE000006A0 /* ContentView.swift */; };
 		43C9D46C2A5C56AF000006A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43C9D46B2A5C56AF000006A0 /* Assets.xcassets */; };
 		43C9D46F2A5C56AF000006A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43C9D46E2A5C56AF000006A0 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		43AC4BCC2A5DC0A900FD0930 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43C9D45C2A5C56AE000006A0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43C9D4632A5C56AE000006A0;
+			remoteInfo = PetFinder;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		43AC4BB72A5DB6BD00FD0930 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		43AC4BB92A5DB76800FD0930 /* PetLost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetLost.swift; sourceTree = "<group>"; };
+		43AC4BBC2A5DBA7E00FD0930 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		43AC4BBE2A5DBACB00FD0930 /* Breed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breed.swift; sourceTree = "<group>"; };
+		43AC4BC02A5DBB3E00FD0930 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		43AC4BC22A5DBB7F00FD0930 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		43AC4BC82A5DC0A900FD0930 /* PetFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		43AC4BCA2A5DC0A900FD0930 /* PetFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderTests.swift; sourceTree = "<group>"; };
+		43AC4BD12A5DC4C900FD0930 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
+		43AC4BD32A5DC6F000FD0930 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		43AC4BD52A5DCBB400FD0930 /* PetFinder.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = PetFinder.xctestplan; sourceTree = "<group>"; };
 		43C9D4642A5C56AE000006A0 /* PetFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43C9D4672A5C56AE000006A0 /* PetFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderApp.swift; sourceTree = "<group>"; };
 		43C9D4692A5C56AE000006A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -22,6 +52,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		43AC4BC52A5DC0A900FD0930 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43C9D4612A5C56AE000006A0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -32,10 +69,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43AC4BB52A5C585B00FD0930 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				43AC4BC22A5DBB7F00FD0930 /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		43AC4BB62A5DB6A900FD0930 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				43AC4BB72A5DB6BD00FD0930 /* User.swift */,
+				43AC4BBE2A5DBACB00FD0930 /* Breed.swift */,
+				43AC4BB92A5DB76800FD0930 /* PetLost.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		43AC4BBB2A5DBA5C00FD0930 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				43AC4BC02A5DBB3E00FD0930 /* Errors.swift */,
+				43AC4BBC2A5DBA7E00FD0930 /* Constants.swift */,
+				43AC4BD32A5DC6F000FD0930 /* Date+Extension.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		43AC4BC92A5DC0A900FD0930 /* PetFinderTests */ = {
+			isa = PBXGroup;
+			children = (
+				43AC4BCA2A5DC0A900FD0930 /* PetFinderTests.swift */,
+			);
+			path = PetFinderTests;
+			sourceTree = "<group>";
+		};
 		43C9D45B2A5C56AE000006A0 = {
 			isa = PBXGroup;
 			children = (
+				43AC4BD52A5DCBB400FD0930 /* PetFinder.xctestplan */,
 				43C9D4662A5C56AE000006A0 /* PetFinder */,
+				43AC4BC92A5DC0A900FD0930 /* PetFinderTests */,
 				43C9D4652A5C56AE000006A0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				43C9D4642A5C56AE000006A0 /* PetFinder.app */,
+				43AC4BC82A5DC0A900FD0930 /* PetFinderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,6 +129,9 @@
 			children = (
 				43C9D4672A5C56AE000006A0 /* PetFinderApp.swift */,
 				43C9D4692A5C56AE000006A0 /* ContentView.swift */,
+				43AC4BB62A5DB6A900FD0930 /* Model */,
+				43AC4BB52A5C585B00FD0930 /* Managers */,
+				43AC4BBB2A5DBA5C00FD0930 /* Utilities */,
 				43C9D46B2A5C56AF000006A0 /* Assets.xcassets */,
 				43C9D46D2A5C56AF000006A0 /* Preview Content */,
 			);
@@ -63,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				43C9D46E2A5C56AF000006A0 /* Preview Assets.xcassets */,
+				43AC4BD12A5DC4C900FD0930 /* PreviewData.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -70,6 +150,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		43AC4BC72A5DC0A900FD0930 /* PetFinderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43AC4BCE2A5DC0A900FD0930 /* Build configuration list for PBXNativeTarget "PetFinderTests" */;
+			buildPhases = (
+				43AC4BC42A5DC0A900FD0930 /* Sources */,
+				43AC4BC52A5DC0A900FD0930 /* Frameworks */,
+				43AC4BC62A5DC0A900FD0930 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				43AC4BCD2A5DC0A900FD0930 /* PBXTargetDependency */,
+			);
+			name = PetFinderTests;
+			productName = PetFinderTests;
+			productReference = 43AC4BC82A5DC0A900FD0930 /* PetFinderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		43C9D4632A5C56AE000006A0 /* PetFinder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43C9D4722A5C56AF000006A0 /* Build configuration list for PBXNativeTarget "PetFinder" */;
@@ -97,6 +195,10 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					43AC4BC72A5DC0A900FD0930 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 43C9D4632A5C56AE000006A0;
+					};
 					43C9D4632A5C56AE000006A0 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -116,11 +218,19 @@
 			projectRoot = "";
 			targets = (
 				43C9D4632A5C56AE000006A0 /* PetFinder */,
+				43AC4BC72A5DC0A900FD0930 /* PetFinderTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		43AC4BC62A5DC0A900FD0930 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43C9D4622A5C56AE000006A0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -133,18 +243,78 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		43AC4BC42A5DC0A900FD0930 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43AC4BCB2A5DC0A900FD0930 /* PetFinderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43C9D4602A5C56AE000006A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43AC4BBF2A5DBACB00FD0930 /* Breed.swift in Sources */,
+				43AC4BBD2A5DBA7E00FD0930 /* Constants.swift in Sources */,
 				43C9D46A2A5C56AE000006A0 /* ContentView.swift in Sources */,
 				43C9D4682A5C56AE000006A0 /* PetFinderApp.swift in Sources */,
+				43AC4BC32A5DBB7F00FD0930 /* NetworkManager.swift in Sources */,
+				43AC4BD42A5DC6F000FD0930 /* Date+Extension.swift in Sources */,
+				43AC4BD22A5DC4C900FD0930 /* PreviewData.swift in Sources */,
+				43AC4BB82A5DB6BD00FD0930 /* User.swift in Sources */,
+				43AC4BBA2A5DB76800FD0930 /* PetLost.swift in Sources */,
+				43AC4BC12A5DBB3E00FD0930 /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		43AC4BCD2A5DC0A900FD0930 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43C9D4632A5C56AE000006A0 /* PetFinder */;
+			targetProxy = 43AC4BCC2A5DC0A900FD0930 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		43AC4BCF2A5DC0A900FD0930 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W8A2PVHCN3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.hludovic.PetFinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PetFinder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PetFinder";
+			};
+			name = Debug;
+		};
+		43AC4BD02A5DC0A900FD0930 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W8A2PVHCN3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.hludovic.PetFinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PetFinder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PetFinder";
+			};
+			name = Release;
+		};
 		43C9D4702A5C56AF000006A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -320,6 +490,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		43AC4BCE2A5DC0A900FD0930 /* Build configuration list for PBXNativeTarget "PetFinderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43AC4BCF2A5DC0A900FD0930 /* Debug */,
+				43AC4BD02A5DC0A900FD0930 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		43C9D45F2A5C56AE000006A0 /* Build configuration list for PBXProject "PetFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
